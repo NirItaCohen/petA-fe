@@ -7,6 +7,8 @@ import {
   Modal,
 } from "react-bootstrap";
 import "./searchBar.css";
+import { AdvanceSearch } from "./Advance_search/AdvanceSearch";
+
 export const SearchBar = ({ showModal }) => {
   const [showAdvance, setShowAdvance] = useState(false);
   const [type, setType] = useState("Pet Type");
@@ -24,6 +26,8 @@ export const SearchBar = ({ showModal }) => {
     event.target.parentElement.classList = "dropdown-menu";
     setType(event.target.value);
   };
+
+  const handleShowAdvanceSearch = () => {};
 
   const handleSubmit = () => {
     const basicSearchQuery = { type, serachQuery };

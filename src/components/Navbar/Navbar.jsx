@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 import "./navbar.css";
 
-import { AppContext } from "../../../App";
+import { AppContext } from "../../App";
 import { NavbarModal } from "./Navbar_Modal/NavbarModal";
 import { ProfileSettings } from "./Profile_Settings/ProfileSettings";
 

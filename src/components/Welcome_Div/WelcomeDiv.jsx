@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Container } from "react-bootstrap";
-import { AppContext } from "../../../App";
+import { AppContext } from "../../App";
 
 export const WelcomeDiv = () => {
   const { user } = useContext(AppContext);
