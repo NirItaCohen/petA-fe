@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 import "./navbar.css";
@@ -28,23 +28,52 @@ export const Navbar = () => {
 
   return (
     <>
-      <Container className="bg-warning py-3 border-0" fluid>
-        <NavLink to={"/"}>Home</NavLink>
-        {user ? (
-          <>
-            <NavLink to={"/MyPets"}>{user.name} pets</NavLink>
-            <button onClick={handleLoginModal}>Log out</button>
-            <button onClick={handleSearchModal}>Search</button>
-            <ProfileSettings />
-          </>
-        ) : (
-          <>
-            <button variant="outline-danger" onClick={handleLoginModal}>
-              Login
-            </button>
-            <button onClick={handleSignUpModal}>Sign Up</button>
-          </>
-        )}
+      <Container
+        className="bg-warning py-3 border-0 d-flex justify-content-between align-items-center"
+        fluid
+      >
+        <NavLink className={"display-6"} to={"/"}>
+          Home
+        </NavLink>
+        <div>
+          <NavLink className={"me-3"} to={"/search"}>
+            Search
+          </NavLink>
+          {user ? (
+            <>
+              <NavLink to={"/MyPets"}>{user.name} pets</NavLink>
+              <button
+                onClick={handleLoginModal}
+                className="btn btn-outline-light mx-2"
+              >
+                Log out
+              </button>
+              <button
+                onClick={handleSearchModal}
+                className="btn btn-outline-light mx-2"
+              >
+                Search
+              </button>
+              <ProfileSettings />
+            </>
+          ) : (
+            <>
+              <button
+                className="btn btn-outline-light mx-2"
+                onClick={handleLoginModal}
+              >
+                Login
+              </button>
+              <button
+                onClick={handleSignUpModal}
+                className="btn btn-outline-light mx-2"
+              >
+                Sign Up
+              </button>
+            </>
+          )}
+        </div>
+
         {showModal && (
           <NavbarModal loginStat={loginStat} showModal={setShowModal} />
         )}
@@ -52,23 +81,3 @@ export const Navbar = () => {
     </>
   );
 };
-
-// <Navbar bg="light" expand="lg">
-//   <Container>
-//     <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-//     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-//     <Navbar.Collapse id="basic-navbar-nav">
-//       <Nav className="me-auto">
-//         <Nav.Link href="#home">Home</Nav.Link>
-//         <Nav.Link href="#link">Link</Nav.Link>
-//         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-//           <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-//           <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-//           <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-//           <NavDropdown.Divider />
-//           <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-//         </NavDropdown>
-//       </Nav>
-//     </Navbar.Collapse>
-//   </Container>
-// </Navbar>;

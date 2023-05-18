@@ -1,17 +1,29 @@
-button {
-  border: none;
-  background: none;
+a {
+  outline: none;
   color: #fff;
-  font-size: 50px;
-  font-weight: 700;
-  margin: 1px;
-  /* margin-top: 1px; */
-  /* margin-bottom: 1px; */
+  text-decoration: none;
 }
 
-button:hover {
-  border: #fff 1px solid;
-  border-radius: 10px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+a:link {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:focus {
+  text-decoration: none;
+  background: #ffc107;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #000;
+}
+
+a:active {
+  color: #ffc107;
 }

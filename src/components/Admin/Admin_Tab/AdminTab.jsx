@@ -2,17 +2,15 @@ import { useEffect, useState, useContext } from "react";
 
 import { Button, Nav } from "react-bootstrap";
 
-import { SignUp } from "../Navbar/Sign_Up/SignUp";
-import { AddPet } from "./AddPet";
-import { AdmimContext } from "./Admin";
-import getAllPets from "../../utils/DB_Funcrions//Pets/petsCrud";
-import getAllUsers from "../../utils/DB_Funcrions/Users/usersCrud";
+import { AdmimContext } from "../Admin";
+import { getAllPets } from "../../../utils/DB/Pets/petsCrud";
+import { getAllUsers } from "../../../utils/DB/Users/usersCrud";
 
-import "./adminTab.css";
+import "../Admin_Tab/adminTab.css";
+
 export const AdminTab = ({ tabType }) => {
-  // const [showCommand, setShowCommand] = useState("");
-
-  const { setPets, setUsers, toggle, setToggle } = useContext(AdmimContext);
+  const { setPets, setUsers, toggle, setToggle, addInstance } =
+    useContext(AdmimContext);
   const [fetchedPets, setFetchedPets] = useState(null);
   const [fetchedUsers, setFetchedUsers] = useState(null);
 
@@ -48,22 +46,14 @@ export const AdminTab = ({ tabType }) => {
       setToggle("pets");
       const data = await getAllPets();
       setFetchedPets(data.data.data.pets);
-    } else {
+      return;
+    }
+    if (tabType === "user") {
       setToggle("users");
       const data = await getAllUsers();
       setFetchedUsers(data.data.data.users);
+      return;
     }
-  };
-
-  const addInstance = () => {
-    // setShowCommand("add");
-    return tabType === "pet" ? (
-      <>
-        <h3>Add pet</h3>
-      </>
-    ) : (
-      <h3>Add user</h3>
-    );
   };
 
   const toggleView = (event) => {
@@ -105,13 +95,22 @@ export const AdminTab = ({ tabType }) => {
         <div className="d-flex flex-column">
           {
             <>
-              <Button onClick={showAll} className="m-4">
-                Show {upperFirstTabChar()}
+              <Button
+                onClick={showAll}
+                className="m-4"
+                variant={"outline-primary"}
+              >
+                Show {upperFirstTabChar()}s
               </Button>
-
-              <Button onClick={addInstance} className="m-4">
-                Add {upperFirstTabChar()}
-              </Button>
+              {tabType === "pet" && (
+                <Button
+                  onClick={addInstance}
+                  className="m-4"
+                  variant={"outline-primary"}
+                >
+                  Add {upperFirstTabChar()}
+                </Button>
+              )}
             </>
           }
         </div>
