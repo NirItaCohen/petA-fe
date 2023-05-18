@@ -4,21 +4,23 @@ import "./App.css";
 
 import { Home } from "./pages/Home/Home.jsx";
 import { MyPets } from "./pages/My_Pets/MyPets.jsx";
-import { Header } from "./components/Header/Header.jsx";
+import { Navbar } from "./components/Navbar/Navbar";
+import { Search } from "./pages/Search/Search";
 
 export const AppContext = createContext();
 function App() {
-  const [user, setUser] = useState({ name: "Nir" });
-  // const [user, setUser] = useState(null);
+  // const [user, setUser] = useState({ name: "Nir" });
+  const [user, setUser] = useState(null);
 
   return (
     <div className="App">
       <AppContext.Provider value={{ user, setUser }}>
         <Router>
-          <Header />
+          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/MyPets" element={<MyPets />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
         </Router>
       </AppContext.Provider>

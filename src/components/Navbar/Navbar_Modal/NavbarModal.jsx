@@ -4,7 +4,6 @@ import "./NavbarModal.css";
 
 import { Login } from "../Login/Login";
 import { SignUp } from "../Sign_Up/SignUp";
-import { SearchBar } from "../Search_Bar/SearchBar";
 
 export const NavbarModal = ({ loginStat, showModal }) => {
   const headLineTitle = loginStat ? loginStat : "Search";
@@ -20,10 +19,8 @@ export const NavbarModal = ({ loginStat, showModal }) => {
         </Modal.Header>
         {loginStat === "login" ? (
           <Login showModal={showModal} />
-        ) : loginStat === "signUp" ? (
-          <SignUp showModal={showModal} />
         ) : (
-          <SearchBar showModal={showModal} />
+          <SignUp showModal={showModal} />
         )}
       </Modal>
     </>

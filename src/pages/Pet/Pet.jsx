@@ -1,3 +1,3 @@
 export const Pet = () => {
-  return <div></div>;
+  return <div>Pet</div>;
 };
