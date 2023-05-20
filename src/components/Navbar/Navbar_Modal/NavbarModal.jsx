@@ -6,7 +6,7 @@ import { Login } from "../Login/Login";
 import { SignUp } from "../Sign_Up/SignUp";
 
 export const NavbarModal = ({ loginStat, showModal }) => {
-  const headLineTitle = loginStat ? loginStat : "Search";
+  const headLineTitle = loginStat;
 
   return (
     <>

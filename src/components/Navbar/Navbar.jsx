@@ -22,10 +22,6 @@ export const Navbar = () => {
     setLoginStat("signUp");
   };
 
-  const handleSearchModal = () => {
-    setShowModal(true);
-  };
-
   return (
     <>
       <Container
@@ -48,12 +44,6 @@ export const Navbar = () => {
               >
                 Log out
               </button>
-              <button
-                onClick={handleSearchModal}
-                className="btn btn-outline-light mx-2"
-              >
-                Search
-              </button>
               <ProfileSettings />
             </>
           ) : (
@@ -65,8 +55,8 @@ export const Navbar = () => {
                 Login
               </button>
               <button
-                onClick={handleSignUpModal}
                 className="btn btn-outline-light mx-2"
+                onClick={handleSignUpModal}
               >
                 Sign Up
               </button>

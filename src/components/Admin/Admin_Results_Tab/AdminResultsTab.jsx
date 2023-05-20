@@ -4,11 +4,11 @@ import { PetCard } from "../../Pet_Card/PetCard";
 import { UserCard } from "../../User_Card/UserCard";
 
 export const AdminResultsTab = () => {
-  const { users, pets, toggle } = useContext(AdmimContext);
+  const { users, pets, toggle, editInstance, deleteInstance} = useContext(AdmimContext);
 
   const renderPets = () => {
     return pets.map((pet) => (
-      <PetCard pet={pet} key={pet._id} adminResults={true} />
+      <PetCard pet={pet} key={pet._id} adminResults={true} editInstance={editInstance} deleteInstance={deleteInstance} />
     ));
   };
   const renderUsers = () => {
