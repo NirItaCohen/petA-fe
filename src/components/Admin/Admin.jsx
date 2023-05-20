@@ -18,6 +18,7 @@ export const Admin = () => {
   const editInstance = (instanceType, instanceData) => {};
 
   const deleteInstance = (instanceType, instanceID) => {
+
     instanceType === "pet" ? deletePet(instanceID) : deleteUser(instanceID);
   };
 

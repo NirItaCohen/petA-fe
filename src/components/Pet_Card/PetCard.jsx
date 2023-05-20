@@ -1,9 +1,11 @@
-import { useContext } from "react";
 import { Button, Card } from "react-bootstrap";
-import { AdmimContext } from "../Admin/Admin";
 
-export const PetCard = ({ adminResults, pet }) => {
-  const { editInstance, deleteInstance } = useContext(AdmimContext);
+export const PetCard = ({
+  adminResults,
+  pet,
+  editInstance,
+  deleteInstance,
+}) => {
   return (
     <>
       <Card className="w-75 my-3">
@@ -24,22 +26,24 @@ export const PetCard = ({ adminResults, pet }) => {
           <Button className="m-2" variant="outline-primary">
             {pet.name}'s page
           </Button>
-          <div>
-            <Button
-              className="m-2"
-              variant="outline-warning"
-              onClick={() => editInstance("pet", pet)}
-            >
-              Edit
-            </Button>
-            <Button
-              className="m-2"
-              variant="outline-danger"
-              onClick={() => deleteInstance("user", pet._id)}
-            >
-              Delete
-            </Button>
-          </div>
+          {adminResults === true ? (
+            <div>
+              <Button
+                className="m-2"
+                variant="outline-warning"
+                onClick={() => editInstance("pet", pet)}
+              >
+                Edit
+              </Button>
+              <Button
+                className="m-2"
+                variant="outline-danger"
+                onClick={() => deleteInstance("user", pet._id)}
+              >
+                Delete
+              </Button>
+            </div>
+          ) : null}
         </div>
       </Card>
     </>

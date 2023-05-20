@@ -1,51 +1,100 @@
-import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
+import "./login.css";
+
+import useInput from "../../../hooks/useInput";
+
+const isEmail = (value) => value.includes("@");
+const isNotEmpty = (value) => value.trim() !== "";
+
 export const Login = ({ showModal }) => {
-  const [loginInfo, setLoginInfo] = useState({
-    email: "",
-    password: "",
-  });
+  const {
+    value: enteredEmail,
+    isValid: enteredEmailIsValid,
+    hasError: emailInputHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    resetInput: resetEmailInput,
+  } = useInput(isEmail);
+  const {
+    value: enteredPassword,
+    isValid: enteredPasswordIsValid,
+    hasError: passwordInputHasError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    resetInput: resetPasswordInput,
+  } = useInput(isNotEmpty);
+
+  let formIsValid = false;
+  if (enteredEmail && enteredPassword) {
+    formIsValid = true;
+  }
 
   const handleClose = () => {
     showModal(false);
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setLoginInfo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!enteredEmailIsValid) {
+      return;
+    }
+    if (!enteredPasswordIsValid) {
+      return;
+    }
+
+    const loginObj = {
+      enteredEmail,
+      enteredPassword,
+    };
+
+    // login(loginObj)
+
+    resetEmailInput();
+    resetPasswordInput();
   };
 
-  const handleSubmit = () => {};
+  // Setting style classes for validation indication
+  const emailInputClasses = emailInputHasError
+    ? "form-input-control invalid"
+    : "form-input-control";
+  const passwordInputClasses = passwordInputHasError
+    ? "form-input-control invalid"
+    : "form-input-control";
 
   return (
     <div>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
+          <Form.Group className={emailInputClasses}>
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
-              onChange={handleChange}
+              onChange={emailChangeHandler}
+              onBlur={emailBlurHandler}
               name="email"
-              value={loginInfo.email}
-              autoFocus
+              value={enteredEmail}
             />
           </Form.Group>
-          <Form.Group className="mb-3">
+          {emailInputHasError && (
+            <p className="error-text">Email must not be empty</p>
+          )}
+          <Form.Group className={passwordInputClasses}>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="Password"
-              onChange={handleChange}
+              min={4}
+              max={10}
+              onChange={passwordChangeHandler}
+              onBlur={passwordBlurHandler}
               name="password"
-              value={loginInfo.password}
-              autoFocus
+              value={enteredPassword}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          {passwordInputHasError && (
+            <p className="error-text">Password must not be empty</p>
+          )}
+          <Button disabled={!formIsValid} variant="primary" type="submit">
             Login
           </Button>
         </Form>
