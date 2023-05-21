@@ -3,7 +3,7 @@ import { Button, Card } from "react-bootstrap";
 export const PetCard = ({
   adminResults,
   pet,
-  editInstance,
+  openEditModal,
   deleteInstance,
 }) => {
   return (
@@ -31,14 +31,14 @@ export const PetCard = ({
               <Button
                 className="m-2"
                 variant="outline-warning"
-                onClick={() => editInstance("pet", pet)}
+                onClick={() => openEditModal("pet", pet)}
               >
                 Edit
               </Button>
               <Button
                 className="m-2"
                 variant="outline-danger"
-                onClick={() => deleteInstance("user", pet._id)}
+                onClick={() => deleteInstance("pet", pet._id)}
               >
                 Delete
               </Button>
