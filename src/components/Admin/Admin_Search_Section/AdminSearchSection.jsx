@@ -1,59 +1,16 @@
-import { useEffect, useState, useContext } from "react";
-
+import { useContext } from "react";
 import { Button, Nav } from "react-bootstrap";
-
 import { AdmimContext } from "../Admin";
-import { getAllPets } from "../../../utils/DB/Pets/petsCrud";
-import { getAllUsers } from "../../../utils/DB/Users/usersCrud";
+import "./adminSearchSection.css";
 
-import "../Admin_Tab/adminTab.css";
-
-export const AdminTab = ({ tabType }) => {
-  const { setPets, setUsers, toggle, setToggle, addInstance } =
-    useContext(AdmimContext);
-  const [fetchedPets, setFetchedPets] = useState(null);
-  const [fetchedUsers, setFetchedUsers] = useState(null);
-
-  useEffect(() => {
-    if (fetchedPets == null) {
-      return undefined;
-    }
-    if (!Array.isArray(fetchedPets)) {
-      return undefined;
-    }
-    setPets(fetchedPets);
-  }, [fetchedPets]);
-
-  useEffect(() => {
-    if (fetchedUsers == null) {
-      return undefined;
-    }
-    if (!Array.isArray(fetchedUsers)) {
-      return undefined;
-    }
-    setUsers(fetchedUsers);
-  }, [fetchedUsers]);
+export const AdminSearchSection = ({ tabType }) => {
+  const { toggle, setToggle, openAddModal, showAll } = useContext(AdmimContext);
 
   const upperFirstTabChar = () => {
     return tabType
       .split("")[0]
       .toUpperCase()
       .concat(tabType.slice(1, tabType.length));
-  };
-
-  const showAll = async () => {
-    if (tabType === "pet") {
-      setToggle("pets");
-      const data = await getAllPets();
-      setFetchedPets(data.data.data.pets);
-      return;
-    }
-    if (tabType === "user") {
-      setToggle("users");
-      const data = await getAllUsers();
-      setFetchedUsers(data.data.data.users);
-      return;
-    }
   };
 
   const toggleView = (event) => {
@@ -96,7 +53,7 @@ export const AdminTab = ({ tabType }) => {
           {
             <>
               <Button
-                onClick={showAll}
+                onClick={() => showAll(tabType)}
                 className="m-4"
                 variant={"outline-primary"}
               >
@@ -104,7 +61,7 @@ export const AdminTab = ({ tabType }) => {
               </Button>
               {tabType === "pet" && (
                 <Button
-                  onClick={addInstance}
+                  onClick={openAddModal}
                   className="m-4"
                   variant={"outline-primary"}
                 >

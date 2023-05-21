@@ -3,17 +3,30 @@ import { AdmimContext } from "../Admin";
 import { PetCard } from "../../Pet_Card/PetCard";
 import { UserCard } from "../../User_Card/UserCard";
 
-export const AdminResultsTab = () => {
-  const { users, pets, toggle, editInstance, deleteInstance} = useContext(AdmimContext);
+export const AdminResultsSection = () => {
+  const { users, pets, toggle, openEditModal, deleteInstance } =
+    useContext(AdmimContext);
 
   const renderPets = () => {
     return pets.map((pet) => (
-      <PetCard pet={pet} key={pet._id} adminResults={true} editInstance={editInstance} deleteInstance={deleteInstance} />
+      <PetCard
+        pet={pet}
+        key={pet._id}
+        adminResults={true}
+        openEditModal={openEditModal}
+        deleteInstance={deleteInstance}
+      />
     ));
   };
   const renderUsers = () => {
     return users.map((user) => (
-      <UserCard user={user} key={user._id} adminResults={true} />
+      <UserCard
+        user={user}
+        key={user._id}
+        adminResults={true}
+        openEditModal={openEditModal}
+        deleteInstance={deleteInstance}
+      />
     ));
   };
 

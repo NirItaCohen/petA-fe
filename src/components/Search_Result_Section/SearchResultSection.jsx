@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PetCard } from "../Pet_Card/PetCard";
 
-export const ResultSection = ({ filteredSearch }) => {
+export const SearchResultSection = ({ filteredSearch }) => {
   const [pets, setPets] = useState(null);
 
   const assginData = async () => {

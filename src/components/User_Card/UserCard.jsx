@@ -1,9 +1,11 @@
-import { useContext } from "react";
 import { Button, Card } from "react-bootstrap";
-import { AdmimContext } from "../Admin/Admin";
 
-export const UserCard = ({ adminResults, user }) => {
-  const { editInstance, deleteInstance } = useContext(AdmimContext);
+export const UserCard = ({
+  adminResults,
+  user,
+  openEditModal,
+  deleteInstance,
+}) => {
   return (
     <>
       <Card className="w-100 my-3">
@@ -13,7 +15,9 @@ export const UserCard = ({ adminResults, user }) => {
         <Card.Body>
           <Card.Title className="d-2">{user.name}</Card.Title>
           <div className="d-flex align-items-start flex-column">
-            <span className="user-details">Role: {user.role}</span>
+            <span className="user-details">
+              Role: {user.role.includes("user") ? "Regular user" : "Admin"}
+            </span>
             {user.role !== "admin" && (
               <span className="user-details">User pets: {user.pets}</span>
             )}
@@ -23,7 +27,7 @@ export const UserCard = ({ adminResults, user }) => {
           <Button
             className="m-2"
             variant="outline-warning"
-            onClick={() => editInstance("user", user)}
+            onClick={() => openEditModal("user", user)}
           >
             Edit
           </Button>
