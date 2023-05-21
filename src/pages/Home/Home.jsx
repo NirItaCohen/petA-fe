@@ -9,7 +9,7 @@ export const Home = () => {
 
   return (
     <>
-      <WelcomeDiv user={userType} />
+      {userType !== "admin" ? <WelcomeDiv user={userType} /> : null}
 
       {userType === "admin" ? (
         <Admin />

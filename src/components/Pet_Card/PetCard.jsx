@@ -1,4 +1,6 @@
 import { Button, Card } from "react-bootstrap";
+import { Link, NavLink } from "react-router-dom";
+import "./petCard.css";
 
 export const PetCard = ({
   adminResults,
@@ -22,10 +24,13 @@ export const PetCard = ({
             <Card.Img className="w-50" variant="top" src="holder.js/100px180" />
           </div>
         </Card.Body>
-        <div className="d-flex m-1 justify-content-between">
-          <Button className="m-2" variant="outline-primary">
+        <div className="d-flex m-1 justify-content-between align-items-center">
+          <Link
+            className="pet-link btn btn-outline-primary "
+            to={`/pet/${encodeURIComponent(JSON.stringify(pet))}`}
+          >
             {pet.name}'s page
-          </Button>
+          </Link>
           {adminResults === true ? (
             <div>
               <Button
