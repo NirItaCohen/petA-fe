@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Admin } from "../../components/Admin/Admin";
 import { WelcomeDiv } from "../../components/Welcome_Div/WelcomeDiv";
 import { RegularUser } from "../../components/Regular_User/RegularUser";
 import { Guest } from "../../components/Guest/Guest";
+import { AppContext } from "../../App";
 
 export const Home = () => {
-  const [userType, setUserType] = useState("admin");
+  const { user } = useContext(AppContext);
+  const [userType, setUserType] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      setUserType(user.role);
+    }
+  }, [user]);
 
   return (
     <>

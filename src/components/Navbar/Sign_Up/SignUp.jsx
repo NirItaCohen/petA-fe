@@ -3,11 +3,31 @@ import { Button, Form, Modal } from "react-bootstrap";
 import "./signUp.css";
 
 import useInput from "../../../hooks/useInput";
+import { signUp } from "../../../utils/Authentication/signUp";
+import { AppContext } from "../../../App";
+import { useContext } from "react";
 
 const isEmail = (value) => value.includes("@");
 const isNotEmpty = (value) => value.trim() !== "";
 
 export const SignUp = ({ showModal }) => {
+  const { setUser } = useContext(AppContext);
+  const {
+    value: enteredFirstName,
+    isValid: enteredFirstNameIsValid,
+    hasError: firstNameInputHasError,
+    valueChangeHandler: firstNameChangeHandler,
+    inputBlurHandler: firstNameBlurHandler,
+    resetInput: resetFirstNameInput,
+  } = useInput(isNotEmpty);
+  const {
+    value: enteredLastName,
+    isValid: enteredLastNameIsValid,
+    hasError: lastNameInputHasError,
+    valueChangeHandler: lastNameChangeHandler,
+    inputBlurHandler: lastNameBlurHandler,
+    resetInput: resetLastNameInput,
+  } = useInput(isNotEmpty);
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -43,6 +63,8 @@ export const SignUp = ({ showModal }) => {
 
   let formIsValid = false;
   if (
+    enteredFirstName &&
+    enteredLastName &&
     enteredEmail &&
     enteredPassword &&
     enteredPasswordConfirm &&
@@ -59,35 +81,50 @@ export const SignUp = ({ showModal }) => {
     return enteredPassword === enteredPasswordConfirm;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!enteredEmailIsValid) {
+    if (
+      !enteredFirstNameIsValid ||
+      !enteredLastNameIsValid ||
+      !enteredEmailIsValid ||
+      !enteredPasswordConfirmIsValid ||
+      !enteredPhoneIsValid
+    ) {
       return;
     }
     if (!enteredPasswordIsValid && checkPasswords()) {
       return;
     }
-    if (!enteredPasswordConfirmIsValid) {
-      return;
-    }
-    if (!enteredPhoneIsValid) {
-      return;
-    }
-    const newUser = {
-      enteredEmail,
-      enteredPassword,
-      enteredPasswordConfirm,
-      enteredPhone,
-    };
 
-    // signUp(newUser)
-
-    resetEmailInput();
-    resetPasswordInput();
-    resetPasswordConfirmInput();
-    resetPhoneInput();
+    try {
+      const newUser = await signUp(
+        enteredFirstName,
+        enteredLastName,
+        enteredEmail,
+        enteredPassword,
+        enteredPasswordConfirm,
+        enteredPhone
+      );
+      const userData = await newUser.data.data.user;
+      setUser(userData);
+      resetFirstNameInput();
+      resetLastNameInput();
+      resetEmailInput();
+      resetPasswordInput();
+      resetPasswordConfirmInput();
+      resetPhoneInput();
+      showModal(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
+  const firstNameInputClasses = emailInputHasError
+    ? "form-input-control invalid"
+    : "form-input-control";
+  const lastNameInputClasses = emailInputHasError
+    ? "form-input-control invalid"
+    : "form-input-control";
   const emailInputClasses = emailInputHasError
     ? "form-input-control invalid"
     : "form-input-control";
@@ -106,6 +143,32 @@ export const SignUp = ({ showModal }) => {
     <div>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
+          <Form.Group className={firstNameInputClasses}>
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={firstNameChangeHandler}
+              onBlur={firstNameBlurHandler}
+              name="firstName"
+              value={enteredFirstName}
+            />
+          </Form.Group>
+          {firstNameInputHasError && (
+            <p className="error-text">First name must not be empty</p>
+          )}
+          <Form.Group className={lastNameInputClasses}>
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={lastNameChangeHandler}
+              onBlur={lastNameBlurHandler}
+              name="lastName"
+              value={enteredLastName}
+            />
+          </Form.Group>
+          {lastNameInputHasError && (
+            <p className="error-text">Last name must not be empty</p>
+          )}
           <Form.Group className={emailInputClasses}>
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -178,27 +241,3 @@ export const SignUp = ({ showModal }) => {
     </div>
   );
 };
-
-// const [signUpInfo, setSignUpInfo] = useState({
-//   email: "",
-//   password: "",
-//   confirmPassword: "",
-//   phone: "",
-// });
-
-// const handleChange = (event) => {
-//   const { name, value } = event.target;
-//   setSignUpInfo((prev) => ({
-//     ...prev,
-//     [name]: value,
-//   }));
-// };
-// const handleFormSubmit = (event) => {
-// event.preventDefault();
-// if (checkPasswords()) {
-//     console.log("procceiding to server");
-//     handleClose();
-//   } else {
-//     console.log("Passwords do not match");
-//   }
-// };

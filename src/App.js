@@ -10,8 +10,7 @@ import { Pet } from "./pages/Pet/Pet";
 
 export const AppContext = createContext();
 function App() {
-  const [user, setUser] = useState({ name: "Nir" });
-  // const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
   return (
     <div className="App">

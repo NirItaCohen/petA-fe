@@ -13,7 +13,7 @@ export const MyPets = () => {
   const [fosteredPets, setFosteredPets] = useState([]);
 
   const userAdoptedPets = async () => {
-    const data = await getUser("6464d7d78af1429d219b9324");
+    const data = await getUser(user._id);
     const adoptedPetsData = data.data.data.user.petsAdopted;
     if (!adoptedPetsData || adoptedPetsData.length <= 0) {
       return;
@@ -21,7 +21,7 @@ export const MyPets = () => {
     setAdoptedPets(JSON.parse(JSON.stringify(adoptedPetsData)));
   };
   const userFosteredPets = async () => {
-    const data = await getUser("6464d7d78af1429d219b9324");
+    const data = await getUser(user._id);
     const fosteredPetsData = data.data.data.user.petsFostered;
     if (!fosteredPetsData || fosteredPetsData.length <= 0) {
       return;

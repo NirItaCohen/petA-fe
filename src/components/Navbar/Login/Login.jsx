@@ -3,11 +3,15 @@ import { Button, Form, Modal } from "react-bootstrap";
 import "./login.css";
 
 import useInput from "../../../hooks/useInput";
+import { login } from "../../../utils/Authentication/login";
+import { useContext } from "react";
+import { AppContext } from "../../../App";
 
 const isEmail = (value) => value.includes("@");
 const isNotEmpty = (value) => value.trim() !== "";
 
 export const Login = ({ showModal }) => {
+  const { setUser } = useContext(AppContext);
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -34,7 +38,7 @@ export const Login = ({ showModal }) => {
     showModal(false);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!enteredEmailIsValid) {
       return;
@@ -42,13 +46,16 @@ export const Login = ({ showModal }) => {
     if (!enteredPasswordIsValid) {
       return;
     }
-
-    const loginObj = {
-      enteredEmail,
-      enteredPassword,
-    };
-
-    // login(loginObj)
+    try {
+      const userLoggedIn = await login(enteredEmail, enteredPassword);
+      const userData = await userLoggedIn.data.data.user;
+      setUser(userData);
+      resetEmailInput();
+      resetPasswordInput();
+      showModal(false);
+    } catch (error) {
+      console.log(error);
+    }
 
     resetEmailInput();
     resetPasswordInput();

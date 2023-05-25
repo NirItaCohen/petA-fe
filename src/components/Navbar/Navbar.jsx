@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Container } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, redirect } from "react-router-dom";
 
 import "./navbar.css";
 
@@ -9,7 +9,7 @@ import { NavbarModal } from "./Navbar_Modal/NavbarModal";
 import { ProfileSettings } from "./Profile_Settings/ProfileSettings";
 
 export const Navbar = () => {
-  const { user } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
   const [showModal, setShowModal] = useState(false);
   const [loginStat, setLoginStat] = useState("");
 
@@ -20,6 +20,11 @@ export const Navbar = () => {
   const handleSignUpModal = () => {
     setShowModal(true);
     setLoginStat("signUp");
+  };
+
+  const handleSignOut = () => {
+    setUser(null);
+    redirect("/home");
   };
 
   return (
@@ -39,7 +44,7 @@ export const Navbar = () => {
             <>
               <NavLink to={"/MyPets"}>{user.name} pets</NavLink>
               <button
-                onClick={handleLoginModal}
+                onClick={handleSignOut}
                 className="btn btn-outline-light mx-2"
               >
                 Log out
