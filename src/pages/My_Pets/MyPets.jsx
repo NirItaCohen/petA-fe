@@ -11,6 +11,7 @@ export const MyPets = () => {
   const [petsIds, setPetsIds] = useState(null);
   const [adoptedPets, setAdoptedPets] = useState([]);
   const [fosteredPets, setFosteredPets] = useState([]);
+  const [likedPets, setLikedPets] = useState([]);
 
   const userAdoptedPets = async () => {
     const data = await getUser(user._id);
@@ -20,6 +21,7 @@ export const MyPets = () => {
     }
     setAdoptedPets(JSON.parse(JSON.stringify(adoptedPetsData)));
   };
+
   const userFosteredPets = async () => {
     const data = await getUser(user._id);
     const fosteredPetsData = data.data.data.user.petsFostered;
@@ -27,6 +29,15 @@ export const MyPets = () => {
       return;
     }
     setFosteredPets(JSON.parse(JSON.stringify(fosteredPetsData)));
+  };
+
+  const userLikedPets = async () => {
+    const data = await getUser(user._id);
+    const likedPetsData = data.data.data.user.userLiked;
+    if (!likedPetsData || likedPetsData.length <= 0) {
+      return;
+    }
+    setLikedPets(JSON.parse(JSON.stringify(likedPetsData)));
   };
 
   const renderUserPets = (satusPets) => {
@@ -56,8 +67,11 @@ export const MyPets = () => {
       const petIdsArr = pets.map((pet) => pet._id);
       setPetsIds(petIdsArr);
     }
-    userAdoptedPets();
-    userFosteredPets();
+    if (user !== null) {
+      userAdoptedPets();
+      userFosteredPets();
+      userLikedPets();
+    }
   }, [pets]);
 
   const renderAdoptedPets = () => {
@@ -65,6 +79,9 @@ export const MyPets = () => {
   };
 
   const renderFosteredPets = () => {
+    return renderUserPets(fosteredPets);
+  };
+  const renderLikedPets = () => {
     return renderUserPets(fosteredPets);
   };
 
@@ -81,6 +98,12 @@ export const MyPets = () => {
           <Accordion.Header>Fostereds Pets</Accordion.Header>
           <Accordion.Body>
             {Array.isArray(fosteredPets) ? renderFosteredPets() : null}
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="2">
+          <Accordion.Header>Liked Pets</Accordion.Header>
+          <Accordion.Body>
+            {Array.isArray(likedPets) ? renderLikedPets() : null}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
