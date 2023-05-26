@@ -43,3 +43,26 @@ export const deleteUser = async (userId) => {
     console.log(error);
   }
 };
+
+export const adoptOrFosterAndRetrun = async (
+  userId,
+  petId,
+  method,
+  httpMethod
+) => {
+  try {
+    await axios({
+      method: httpMethod,
+      url: `http://localhost:8080/users/${userId}/${petId}&method=${method}`,
+    });
+  } catch (error) {}
+};
+
+export const likeOrUnLike = async (userId, petId, httpMethod) => {
+  try {
+    await axios({
+      method: httpMethod,
+      url: `http://localhost:8080/users/${userId}/${petId}&method=like`,
+    });
+  } catch (error) {}
+};

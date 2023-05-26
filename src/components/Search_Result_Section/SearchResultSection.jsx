@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { PetCard } from "../Pet_Card/PetCard";
+import { Pet } from "../Pet/Pet";
 
-export const SearchResultSection = ({ filteredSearch }) => {
+export const SearchResultSection = ({ filteredSearch, user }) => {
   const [pets, setPets] = useState(null);
 
   const assginData = async () => {
@@ -14,9 +14,7 @@ export const SearchResultSection = ({ filteredSearch }) => {
   }
 
   const renderPets = () => {
-    return pets.map((pet) => (
-      <PetCard adminResults={false} pet={pet} key={pet._id} />
-    ));
+    return pets.map((pet) => <Pet pet={pet} key={pet._id} user={user} />);
   };
 
   return (

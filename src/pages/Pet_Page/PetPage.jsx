@@ -1,54 +1,59 @@
-import { useState } from "react";
 import { Badge, Card, Container, Image, ListGroup, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 
-import "./pet.css";
+import "./petPage.css";
 
-export const Pet = () => {
-  
-  const [like, setLike] = useState(false);
-  const { pet } = useParams();
-  const petObj = JSON.parse(decodeURIComponent(pet));
-
-  const badgeStatus =
-    petObj.adoptionStatus === "Adopted"
-      ? "success"
-      : petObj.adoptionStatus === "Fostered"
-      ? "info"
-      : "primary";
-
-  const handleLike = () => {
-    setLike((prevLike) => !prevLike);
-  };
+export const PetPage = ({
+  pet,
+  user,
+  badgeStatus,
+  setShowPetPage,
+  deleteInstance,
+  like,
+  handleLike,
+  renderReturnBtn,
+  renderAdoptFosterButton,
+}) => {
   return (
     <>
       <Container className="mt-3">
-        <Row md={4} xl={2}>
-          <Image src="" rounded />
-          <Card style={{ width: "18rem" }}>
-            <Card.Body>
-              <Card.Title>{petObj.name}</Card.Title>
+        <Row md={4} xl={2} className="d-flex flex-column">
+          <Image
+            className="w-50 ratio ratio-16x9 rounded align-self-center mb-2"
+            width={160}
+            height={210}
+            variant="top"
+            src={pet.picture}
+          />
+          <Card className="w-100">
+            <Card.Body className="d-flex justify-content-between">
+              <Card.Title>{pet.name}</Card.Title>
+              <span
+                className="close-sign"
+                onClick={() => setShowPetPage(false)}
+              >
+                X
+              </span>
             </Card.Body>
             <ListGroup className="list-group-flush">
               <ListGroup.Item>
                 <p className="warning-text-emphasis">
                   Adoption Status -
                   <Badge className="ms-2" bg={badgeStatus}>
-                    {petObj.adoptionStatus}
+                    {pet.adoptionStatus}
                   </Badge>
                 </p>
               </ListGroup.Item>
               <ListGroup.Item>
-                <p className="warning-text-emphasis">Breed - {petObj.breed}</p>
+                <p className="warning-text-emphasis">Breed - {pet.breed}</p>
               </ListGroup.Item>
               <ListGroup.Item>
                 <p className="warning-text-emphasis">
-                  Height - {petObj.height} cm
+                  Height - {pet.height} cm
                 </p>
               </ListGroup.Item>
               <ListGroup.Item>
                 <p className="warning-text-emphasis">
-                  Weight - {petObj.weight} kg
+                  Weight - {pet.weight} kg
                 </p>
               </ListGroup.Item>
               <ListGroup.Item>
@@ -56,22 +61,23 @@ export const Pet = () => {
                   Hypoallergnic -
                   <Badge
                     className="ms-2"
-                    bg={petObj.hypoallergnic ? "success" : "warning"}
+                    bg={pet.hypoallergnic ? "success" : "warning"}
                   >
-                    {petObj.hypoallergnic ? "Yes" : "No"}
+                    {pet.hypoallergnic ? "Yes" : "No"}
                   </Badge>
                 </p>
               </ListGroup.Item>
             </ListGroup>
-            <Card.Body>
+            <Card.Body className="d-flex">
               <h2 className="like-heart" onClick={handleLike}>
                 {like ? "🧡" : "🤍"}
               </h2>
+              {user ? renderAdoptFosterButton() : null}
+              {user ? renderReturnBtn() : null}
             </Card.Body>
           </Card>
         </Row>
       </Container>
-
     </>
   );
 };

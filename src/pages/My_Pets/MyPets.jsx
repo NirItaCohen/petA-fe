@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Accordion, Container } from "react-bootstrap";
 import { AppContext } from "../../App";
-import { PetCard } from "../../components/Pet_Card/PetCard";
+import { PetCard } from "../Pet_Card/PetCard";
 import { getAllPets } from "../../utils/DB/Pets/petsCrud";
 import { getUser } from "../../utils/DB/Users/usersCrud";
+import { Pet } from "../../components/Pet/Pet";
 
 export const MyPets = () => {
   const { user } = useContext(AppContext);
@@ -11,35 +12,43 @@ export const MyPets = () => {
   const [petsIds, setPetsIds] = useState(null);
   const [adoptedPets, setAdoptedPets] = useState([]);
   const [fosteredPets, setFosteredPets] = useState([]);
+  // const [status, setStatus] = useState("avaliable")
 
   const userAdoptedPets = async () => {
-    const data = await getUser(user._id);
-    const adoptedPetsData = data.data.data.user.petsAdopted;
-    if (!adoptedPetsData || adoptedPetsData.length <= 0) {
-      return;
+    if (user !== null) {
+      const data = await getUser(user._id);
+      const adoptedPetsData = data.data.data.user.petsAdopted;
+      if (!adoptedPetsData || adoptedPetsData.length <= 0) {
+        return;
+      }
+      setAdoptedPets(JSON.parse(JSON.stringify(adoptedPetsData)));
     }
-    setAdoptedPets(JSON.parse(JSON.stringify(adoptedPetsData)));
+    return;
   };
   const userFosteredPets = async () => {
-    const data = await getUser(user._id);
-    const fosteredPetsData = data.data.data.user.petsFostered;
-    if (!fosteredPetsData || fosteredPetsData.length <= 0) {
-      return;
+    if (user !== null) {
+      const data = await getUser(user._id);
+      const fosteredPetsData = data.data.data.user.petsFostered;
+      if (!fosteredPetsData || fosteredPetsData.length <= 0) {
+        return;
+      }
+      setFosteredPets(JSON.parse(JSON.stringify(fosteredPetsData)));
     }
-    setFosteredPets(JSON.parse(JSON.stringify(fosteredPetsData)));
+    return;
   };
 
   const renderUserPets = (satusPets) => {
     if (pets === null || satusPets === null || petsIds === null) {
       return;
     }
-    const arr = satusPets.map((adopt) => {
-      const petIndex =
-        petsIds.indexOf(adopt) > -1 ? petsIds.indexOf(adopt) : -1;
+    const arr = satusPets.map((pet) => {
+      const petIndex = petsIds.indexOf(pet) > -1 ? petsIds.indexOf(pet) : -1;
       return petIndex > -1 ? pets[petIndex] : null;
     });
     return arr.map((item) => {
-      return item ? <PetCard pet={item} key={item._id} /> : null;
+      return item ? (
+        <Pet pet={item} key={item._id} user={user} className="w-100" />
+      ) : null;
     });
   };
 
@@ -73,7 +82,7 @@ export const MyPets = () => {
       <Accordion>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Adopted Pets</Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="w-100">
             {Array.isArray(adoptedPets) ? renderAdoptedPets() : null}
           </Accordion.Body>
         </Accordion.Item>

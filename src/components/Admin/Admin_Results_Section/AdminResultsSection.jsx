@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AdmimContext } from "../Admin";
-import { PetCard } from "../../Pet_Card/PetCard";
+import { Pet } from "../../Pet/Pet";
 import { UserCard } from "../../User_Card/UserCard";
 
 export const AdminResultsSection = () => {
@@ -9,7 +9,7 @@ export const AdminResultsSection = () => {
 
   const renderPets = () => {
     return pets.map((pet) => (
-      <PetCard
+      <Pet
         pet={pet}
         key={pet._id}
         adminResults={true}
@@ -18,6 +18,7 @@ export const AdminResultsSection = () => {
       />
     ));
   };
+
   const renderUsers = () => {
     return users.map((user) => (
       <UserCard
@@ -44,8 +45,3 @@ export const AdminResultsSection = () => {
     </div>
   );
 };
-
-
-
-
-
