@@ -14,44 +14,13 @@ export const Pet = ({
   //mypets props
   pet,
   user,
-  updateUi,
   //adminprops
-
   deleteInstance,
   adminResults,
   openEditModal,
 }) => {
   const [like, setLike] = useState(false);
   const [showPetPage, setShowPetPage] = useState(false);
-
-  useEffect(() => {
-    if (!user) {
-      return;
-    }
-    if (user.petsLiked.includes(pet._id)) {
-      setLike(true);
-    }
-  }, [pet]);
-
-  const handleLike = () => {
-    if (like) {
-      setLike(false);
-      likeOrUnLike(user._id, pet._id, "patch");
-      return;
-    }
-    if (!like) {
-      setLike(true);
-      likeOrUnLike(user._id, pet._id, "post");
-      return;
-    }
-  };
-
-  const badgeStatus =
-    pet.adoptionStatus === "Adopted"
-      ? "success"
-      : pet.adoptionStatus === "Fostered"
-      ? "info"
-      : "primary";
 
   const adoptPet = async () => {
     const petToChnageStatus = await adoptOrFosterAndRetrun(
@@ -60,7 +29,7 @@ export const Pet = ({
       "adopt",
       "POST"
     );
-    if (petToChnageStatus.status === 200) updateUi(pet._id, "adopt");
+    console.log(pet);
   };
 
   const fosterPet = async () => {
@@ -70,61 +39,87 @@ export const Pet = ({
       "foster",
       "POST"
     );
-    if (petToChnageStatus.status === 200) updateUi(pet._id, "foster");
+    console.log(pet);
   };
   const returnPet = async () => {
-    const returnFunction =
-      pet.adoptionStatus === "Adopted"
-        ? adoptOrFosterAndRetrun(user._id, pet._id, "adopt", "PATCH")
-        : pet.adoptionStatus === "Fostered"
-        ? adoptOrFosterAndRetrun(user._id, pet._id, "foster", "PATCH")
-        : null;
-    return returnFunction;
+    pet.adoptionStatus === "Adopted"
+      ? adoptOrFosterAndRetrun(user._id, pet._id, "adopt", "PATCH")
+      : adoptOrFosterAndRetrun(user._id, pet._id, "foster", "PATCH");
+  };
+  const renderReturnBtn = (status) => {
+    const returnBtn = status !== "" && (
+      <>
+        <Button
+          className="m-2"
+          variant="outline-danger"
+          onClick={() => returnPet()}
+        >
+          Return
+        </Button>
+      </>
+    );
+    return returnBtn;
   };
 
   const btnClasses =
     pet.adoptionStatus === "Available" ? "m-2" : "m-2 disabled";
 
-  const renderReturnBtn = () => {
-    if (
-      (pet.adoptionStatus === "Adopted" &&
-        user.petsAdopted.includes(pet._id)) ||
-      (pet.adoptionStatus === "Fostered" && user.petsFostered.includes(pet._id))
-    ) {
+  const checkStatusToRender = () => {
+    let petStatusForBtn = "";
+    if (user.petsAdopted.includes(pet._id)) {
+      return (petStatusForBtn = "adopted");
+    } else if (user.petsFostered.includes(pet._id)) {
+      return (petStatusForBtn = "fostered");
+    }
+    return petStatusForBtn;
+  };
+
+  const createButton = () => {
+    const status = checkStatusToRender();
+    const text = status === "adopted" ? "Adopt" : "Foster";
+
+    const statusChangeFunction =
+      status === "adopted" ? adoptPet() : fosterPet();
+    if (status === "") {
       return (
         <>
           <Button
-            className="m-2"
+            className={btnClasses}
             variant="outline-danger"
-            onClick={() => returnPet()}
+            onClick={() => adoptPet()}
           >
-            Return
+            Adopt
+          </Button>
+
+          <Button
+            className={btnClasses}
+            variant="outline-danger"
+            onClick={() => fosterPet()}
+          >
+            Foster
           </Button>
         </>
       );
     }
-    return null;
-  };
-
-  const renderAdoptFosterButton = () => {
-    return (
+    const button = (
       <>
         <Button
           className={btnClasses}
           variant="outline-danger"
-          onClick={() => adoptPet()}
+          onClick={() => statusChangeFunction()}
         >
-          Adopt
+          {text}
         </Button>
-        <Button
-          className={btnClasses}
-          variant="outline-danger"
-          onClick={() => fosterPet()}
-        >
-          Foster
-        </Button>
+        ;
       </>
     );
+    return button;
+  };
+
+  const renderAdoptFosterButton = (status) => {
+    if (!user) return;
+
+    createButton();
   };
 
   const handlePetPageButtunClick = () => {

@@ -167,10 +167,9 @@ export const AddEditPetModal = ({ modalType, showModal, pet, method }) => {
               </FloatingLabel>
             </Form.Group>
             <Form.Group className="mb-3">
-              <FloatingLabel label="Height" className="mb-2">
+              <FloatingLabel label="Height (cm)" className="mb-2">
                 <Form.Control
                   type="number"
-                  placeholder="Height"
                   onChange={handleChange}
                   name="height"
                   value={petDetails.height}
@@ -178,10 +177,9 @@ export const AddEditPetModal = ({ modalType, showModal, pet, method }) => {
               </FloatingLabel>
             </Form.Group>
             <Form.Group className="mb-3">
-              <FloatingLabel label="Weight" className="mb-2">
+              <FloatingLabel label="Weight (kg)" className="mb-2">
                 <Form.Control
                   type="number"
-                  placeholder="Weight"
                   onChange={handleChange}
                   name="weight"
                   value={petDetails.weight}
@@ -216,7 +214,7 @@ export const AddEditPetModal = ({ modalType, showModal, pet, method }) => {
                   className="form-control"
                   list="colorOptions"
                   placeholder="Type to search..."
-                  value={pet.color}
+                  value={petDetails.color}
                 />
                 <datalist id="colorOptions">{colorOptions}</datalist>
               </FloatingLabel>

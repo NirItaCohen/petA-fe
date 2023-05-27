@@ -4,7 +4,7 @@ import { Button, FloatingLabel, Form, InputGroup, Row } from "react-bootstrap";
 import { searchFilter } from "../../pages/Search/searchFilter";
 
 const PET_TYPES = ["cat", "dog", "other"];
-const ADOPTION_STATUS = ["adopted", "fostered", "avaliable"];
+const ADOPTION_STATUS = ["adopted", "fostered", "available"];
 
 export const SearchSection = ({ setFilteredSearch }) => {
   const [showAdvance, setShowAdvance] = useState(false);
@@ -89,7 +89,7 @@ export const SearchSection = ({ setFilteredSearch }) => {
   };
 
   return (
-    <div className="border w-50 d-flex flex-column align-items-center p-4">
+    <div className="border w-25 d-flex flex-column align-items-center p-4">
       <button onClick={show}>Show</button>
       <Form onSubmit={handleSubmit} className="mb-3 w-100">
         <Form.Label as="legend" column sm={2} className="w-50 mb-2">

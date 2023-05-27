@@ -20,7 +20,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/MyPets" element={<MyPets />} />
-            {/* <Route path="/pet/:pet" element={<Pet />} /> */}
             <Route path="/search" element={<Search />} />
           </Routes>
         </Router>

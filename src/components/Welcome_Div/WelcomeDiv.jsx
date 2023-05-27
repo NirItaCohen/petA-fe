@@ -4,18 +4,32 @@ import { AppContext } from "../../App";
 
 export const WelcomeDiv = () => {
   const { user } = useContext(AppContext);
+
   return (
     <div>
       {user ? (
         <>
-          <Container>
-            <h1>Welcome {user.firsName}</h1>
+          <Container className="mt-5">
+            <h1 className="mb-3">Welcome {user.firstName}</h1>
+            <p>
+              Welcome back, {user.firstName}! We're thrilled to have you
+              continue your pet adoption journey with us. Get ready to find your
+              perfect furry companion and experience the joy they bring. Let's
+              make more unforgettable memories together. Welcome back to a world
+              of wagging tails and endless love!
+            </p>
           </Container>
         </>
       ) : (
         <>
-          <Container>
-            <h1>Welcome guest</h1>
+          <Container className="mt-5">
+            <h1 className="mb-3"> Welcome to Let The Animals Live! </h1>
+            <p>
+              Welcome to our pet adoption app, brought to you by LTAL! Discover
+              your perfect furry companion and make a difference in their lives.
+              Join our community of animal lovers and find your match today.
+              Welcome to a world where love and companionship know no bounds!
+            </p>
           </Container>
         </>
       )}

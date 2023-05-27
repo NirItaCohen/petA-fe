@@ -3,11 +3,12 @@ import { Badge, Button, Card } from "react-bootstrap";
 export const PetCard = ({
   pet,
   user,
+  rendering,
   badgeStatus,
   setShowPetPage,
   adminResults,
   deleteInstance,
-  isLike,
+  like,
   handleLike,
   renderReturnBtn,
   renderAdoptFosterButton,
@@ -67,13 +68,23 @@ export const PetCard = ({
           ) : null}
 
           <Card.Body>
-            <h2 className="like-heart" onClick={handleLike}>
-              {isLike ? "🧡" : "🤍"}
-            </h2>
+            {user && rendering !== "admin" ? (
+              <h2 className="like-heart" onClick={handleLike}>
+                {like ? "🧡" : "🤍"}
+              </h2>
+            ) : null}
           </Card.Body>
           <Card.Body>
-            {user ? renderReturnBtn() : null}
-            {user ? renderAdoptFosterButton() : null}
+            {user &&
+            rendering === "myPets" &&
+            pet.adoptionStatus !== "Available"
+              ? renderReturnBtn()
+              : null}
+            {user &&
+            rendering === "myPets" &&
+            pet.adoptionStatus === "Available"
+              ? renderAdoptFosterButton()
+              : null}
           </Card.Body>
         </div>
       </Card>

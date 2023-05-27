@@ -12,7 +12,7 @@ export const AdminResultsSection = () => {
       <Pet
         pet={pet}
         key={pet._id}
-        adminResults={true}
+        rendering={"admin"}
         openEditModal={openEditModal}
         deleteInstance={deleteInstance}
       />
@@ -24,7 +24,7 @@ export const AdminResultsSection = () => {
       <UserCard
         user={user}
         key={user._id}
-        adminResults={true}
+        rendering={"admin"}
         openEditModal={openEditModal}
         deleteInstance={deleteInstance}
       />

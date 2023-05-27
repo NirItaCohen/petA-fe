@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Accordion, Container } from "react-bootstrap";
 import { AppContext } from "../../App";
-import { PetCard } from "../Pet_Card/PetCard";
 import { getAllPets } from "../../utils/DB/Pets/petsCrud";
-import { getUser } from "../../utils/DB/Users/usersCrud";
+import {
+  getUser,
+  adoptOrFosterAndRetrun,
+} from "../../utils/DB/Users/usersCrud";
 import { Pet } from "../../components/Pet/Pet";
 
 export const MyPets = () => {
@@ -12,7 +14,7 @@ export const MyPets = () => {
   const [petsIds, setPetsIds] = useState(null);
   const [adoptedPets, setAdoptedPets] = useState([]);
   const [fosteredPets, setFosteredPets] = useState([]);
-  // const [status, setStatus] = useState("avaliable")
+  const [likedPets, setLikedPets] = useState([]);
 
   const userAdoptedPets = async () => {
     if (user !== null) {
@@ -37,6 +39,47 @@ export const MyPets = () => {
     return;
   };
 
+  const userLikedPets = async () => {
+    const data = await getUser(user._id);
+    const likedPetsData = data.data.data.user.petsLiked;
+    if (!likedPetsData || likedPetsData.length <= 0) {
+      return;
+    }
+    setLikedPets(JSON.parse(JSON.stringify(likedPetsData)));
+  };
+
+  const updateAdoptPet = (petId) => {
+    const currentPets = [...pets];
+    const pet = currentPets.find((pet) => pet._id === petId);
+    if (pet === undefined) return;
+    pet.adoptionStatus = "Adopted";
+    setPets(currentPets);
+  };
+  const updateFosterPet = (petId) => {
+    const currentPets = [...pets];
+    const pet = currentPets.find((pet) => pet._id === petId);
+    if (pet === undefined) return;
+    pet.adoptionStatus = "Fostered";
+    setPets(currentPets);
+  };
+
+  const updateUi = ( petId, action) => {
+    console.log("updateUid from my pets");
+    switch (action) {
+      case "adopt":
+        updateAdoptPet(petId);
+        break;
+
+      case "foster":
+        updateFosterPet(petId);
+
+        break;
+
+      default:
+        break;
+    }
+  };
+
   const renderUserPets = (satusPets) => {
     if (pets === null || satusPets === null || petsIds === null) {
       return;
@@ -47,7 +90,14 @@ export const MyPets = () => {
     });
     return arr.map((item) => {
       return item ? (
-        <Pet pet={item} key={item._id} user={user} className="w-100" />
+        <Pet
+          updateUi={updateUi}
+          pet={item}
+          key={item._id}
+          user={user}
+          rendering="myPets"
+          className="w-100"
+        />
       ) : null;
     });
   };
@@ -65,8 +115,11 @@ export const MyPets = () => {
       const petIdsArr = pets.map((pet) => pet._id);
       setPetsIds(petIdsArr);
     }
-    userAdoptedPets();
-    userFosteredPets();
+    if (user !== null) {
+      userAdoptedPets();
+      userFosteredPets();
+      userLikedPets();
+    }
   }, [pets]);
 
   const renderAdoptedPets = () => {
@@ -75,6 +128,10 @@ export const MyPets = () => {
 
   const renderFosteredPets = () => {
     return renderUserPets(fosteredPets);
+  };
+
+  const renderLikedPets = () => {
+    return renderUserPets(likedPets);
   };
 
   return (
@@ -90,6 +147,12 @@ export const MyPets = () => {
           <Accordion.Header>Fostereds Pets</Accordion.Header>
           <Accordion.Body>
             {Array.isArray(fosteredPets) ? renderFosteredPets() : null}
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="2">
+          <Accordion.Header>Liked Pets</Accordion.Header>
+          <Accordion.Body>
+            {Array.isArray(likedPets) ? renderLikedPets() : null}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

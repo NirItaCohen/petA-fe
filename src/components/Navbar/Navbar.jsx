@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Container } from "react-bootstrap";
-import { NavLink, redirect, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import "./navbar.css";
 
