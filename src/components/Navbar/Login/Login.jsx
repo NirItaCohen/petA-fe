@@ -1,5 +1,5 @@
 import { Button, Form, Modal } from "react-bootstrap";
-
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 
 import useInput from "../../../hooks/useInput";
@@ -12,6 +12,8 @@ const isNotEmpty = (value) => value.trim() !== "";
 
 export const Login = ({ showModal }) => {
   const { setUser } = useContext(AppContext);
+  const navigate = useNavigate();
+
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -28,6 +30,11 @@ export const Login = ({ showModal }) => {
     inputBlurHandler: passwordBlurHandler,
     resetInput: resetPasswordInput,
   } = useInput(isNotEmpty);
+
+  const resetFields = () => {
+    resetEmailInput();
+    resetPasswordInput();
+  };
 
   let formIsValid = false;
   if (enteredEmail && enteredPassword) {
@@ -50,15 +57,13 @@ export const Login = ({ showModal }) => {
       const userLoggedIn = await login(enteredEmail, enteredPassword);
       const userData = await userLoggedIn.data.data.user;
       setUser(userData);
-      resetEmailInput();
-      resetPasswordInput();
+      resetFields();
       showModal(false);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
-
-    resetEmailInput();
-    resetPasswordInput();
+    resetFields();
   };
 
   // Setting style classes for validation indication

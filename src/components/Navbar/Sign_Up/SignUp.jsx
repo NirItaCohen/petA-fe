@@ -1,4 +1,5 @@
 import { Button, Form, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import "./signUp.css";
 
@@ -12,6 +13,8 @@ const isNotEmpty = (value) => value.trim() !== "";
 
 export const SignUp = ({ showModal }) => {
   const { setUser } = useContext(AppContext);
+  const navigate = useNavigate();
+
   const {
     value: enteredFirstName,
     isValid: enteredFirstNameIsValid,
@@ -61,6 +64,16 @@ export const SignUp = ({ showModal }) => {
     resetInput: resetPhoneInput,
   } = useInput(isNotEmpty);
 
+  const resetFields = () => {
+    resetFirstNameInput();
+    resetLastNameInput();
+    resetEmailInput();
+    resetPasswordInput();
+    resetPasswordConfirmInput();
+    resetPhoneInput();
+    showModal(false);
+  };
+
   let formIsValid = false;
   if (
     enteredFirstName &&
@@ -83,6 +96,7 @@ export const SignUp = ({ showModal }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // validate form sepeate function
     if (
       !enteredFirstNameIsValid ||
       !enteredLastNameIsValid ||
@@ -95,7 +109,6 @@ export const SignUp = ({ showModal }) => {
     if (!enteredPasswordIsValid && checkPasswords()) {
       return;
     }
-
     try {
       const newUser = await signUp(
         enteredFirstName,
@@ -107,13 +120,8 @@ export const SignUp = ({ showModal }) => {
       );
       const userData = await newUser.data.data.user;
       setUser(userData);
-      resetFirstNameInput();
-      resetLastNameInput();
-      resetEmailInput();
-      resetPasswordInput();
-      resetPasswordConfirmInput();
-      resetPhoneInput();
-      showModal(false);
+      resetFields();
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

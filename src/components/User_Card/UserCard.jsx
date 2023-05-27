@@ -1,7 +1,7 @@
 import { Button, Card } from "react-bootstrap";
 
 export const UserCard = ({
-  adminResults,
+  rendering,
   user,
   openEditModal,
   deleteInstance,
@@ -9,7 +9,7 @@ export const UserCard = ({
   return (
     <>
       <Card className="w-100 my-3">
-        {adminResults === false && (
+        {rendering !== "admin" && (
           <Card.Img variant="top" src="holder.js/100px180" />
         )}
         <Card.Body>

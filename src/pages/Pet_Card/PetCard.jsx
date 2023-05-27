@@ -1,63 +1,19 @@
-import { useState } from "react";
 import { Badge, Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import "./petCard.css";
 
 export const PetCard = ({
-  adminResults,
   pet,
-  openEditModal,
-  deleteInstance,
   user,
+  rendering,
+  badgeStatus,
+  setShowPetPage,
+  adminResults,
+  deleteInstance,
+  like,
+  handleLike,
+  renderReturnBtn,
+  renderAdoptFosterButton,
+  openEditModal,
 }) => {
-  const [like, setLike] = useState(false);
-
-  const handleLike = () => {
-    setLike((prevLike) => !prevLike);
-  };
-
-  const badgeStatus =
-    pet.adoptionStatus === "Adopted"
-      ? "success"
-      : pet.adoptionStatus === "Fostered"
-      ? "info"
-      : "primary";
-
-  const renderReturnBtn = () => {
-    return (
-      <>
-        <Button
-          className="m-2"
-          variant="outline-danger"
-          // onClick={() => deleteInstance("pet", pet._id)}  - RETURN FUNCTION
-        >
-          Return
-        </Button>
-        ;
-      </>
-    );
-  };
-
-  const renderAdoptFosterButton = () => {
-    return user.petsFosered ? (
-      <Button
-        className="m-2"
-        variant="outline-danger"
-        // onClick={() => deleteInstance("pet", pet._id)}  - ADOPT FUNCTION
-      >
-        Adopt
-      </Button>
-    ) : (
-      <Button
-        className="m-2"
-        variant="outline-danger"
-        // onClick={() => deleteInstance("pet", pet._id)}  - FOSTER FUNCTION
-      >
-        FOSTER
-      </Button>
-    );
-  };
-
   return (
     <>
       <Card className="w-75 my-3">
@@ -85,12 +41,13 @@ export const PetCard = ({
           </div>
         </Card.Body>
         <div className="d-flex m-1 justify-content-between align-items-center">
-          <Link
+          <Button
+            style={{ color: "white" }}
             className="pet-link btn btn-outline-primary "
-            to={`/pet/${encodeURIComponent(JSON.stringify(pet))}`}
+            onClick={() => setShowPetPage()}
           >
             {pet.name}'s page
-          </Link>
+          </Button>
           {adminResults === true ? (
             <div>
               <Button
@@ -109,13 +66,25 @@ export const PetCard = ({
               </Button>
             </div>
           ) : null}
-          {user ? renderReturnBtn() : null}
-          {user ? renderAdoptFosterButton() : null}
 
           <Card.Body>
-            <h2 className="like-heart" onClick={handleLike}>
-              {like ? "🧡" : "🤍"}
-            </h2>
+            {user && rendering !== "admin" ? (
+              <h2 className="like-heart" onClick={handleLike}>
+                {like ? "🧡" : "🤍"}
+              </h2>
+            ) : null}
+          </Card.Body>
+          <Card.Body>
+            {user &&
+            rendering === "myPets" &&
+            pet.adoptionStatus !== "Available"
+              ? renderReturnBtn()
+              : null}
+            {user &&
+            rendering === "myPets" &&
+            pet.adoptionStatus === "Available"
+              ? renderAdoptFosterButton()
+              : null}
           </Card.Body>
         </div>
       </Card>

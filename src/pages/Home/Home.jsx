@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Admin } from "../../components/Admin/Admin";
 import { WelcomeDiv } from "../../components/Welcome_Div/WelcomeDiv";
-import { RegularUser } from "../../components/Regular_User/RegularUser";
-import { Guest } from "../../components/Guest/Guest";
 import { AppContext } from "../../App";
 
 export const Home = () => {
@@ -19,13 +17,7 @@ export const Home = () => {
     <>
       {userType !== "admin" ? <WelcomeDiv user={userType} /> : null}
 
-      {userType === "admin" ? (
-        <Admin />
-      ) : userType === "regularUser" ? (
-        <RegularUser />
-      ) : (
-        <Guest />
-      )}
+      {userType === "admin" ? <Admin /> : null}
     </>
   );
 };

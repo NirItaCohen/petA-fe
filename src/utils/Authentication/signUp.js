@@ -20,6 +20,7 @@ export const signUp = async (
         passwordConfirm,
         phone,
       },
+      withCredentials: true,
     });
 
     return res;

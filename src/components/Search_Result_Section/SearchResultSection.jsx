@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { PetCard } from "../Pet_Card/PetCard";
+import { Pet } from "../Pet/Pet";
 
-export const SearchResultSection = ({ filteredSearch }) => {
+export const SearchResultSection = ({ filteredSearch, user }) => {
   const [pets, setPets] = useState(null);
 
   const assginData = async () => {
@@ -15,12 +15,12 @@ export const SearchResultSection = ({ filteredSearch }) => {
 
   const renderPets = () => {
     return pets.map((pet) => (
-      <PetCard adminResults={false} pet={pet} key={pet._id} />
+      <Pet pet={pet} key={pet._id} user={user} rendering="search" />
     ));
   };
 
   return (
-    <div className="border w-50 mx-2 p-3 d-flex flex-column align-items-center">
+    <div className="border w-75 mx-2 p-3 d-flex flex-column align-items-center">
       <h3 className="pt-2">Results</h3>
 
       {Array.isArray(pets) && pets.length > 0 && renderPets()}

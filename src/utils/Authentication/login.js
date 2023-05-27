@@ -6,9 +6,9 @@ export const login = async (email, password) => {
       method: "POST",
       url: "http://localhost:8080/users/login",
       data: { email, password },
+      withCredentials: true,
     });
     return res;
-
   } catch (error) {
     console.log(error.response.data);
   }
