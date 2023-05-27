@@ -3,6 +3,7 @@ import { Badge, Card, Container, Image, ListGroup, Row } from "react-bootstrap";
 import "./petPage.css";
 
 export const PetPage = ({
+  rendering,
   pet,
   user,
   badgeStatus,
@@ -68,12 +69,24 @@ export const PetPage = ({
                 </p>
               </ListGroup.Item>
             </ListGroup>
-            <Card.Body className="d-flex">
-              <h2 className="like-heart" onClick={handleLike}>
-                {like ? "🧡" : "🤍"}
-              </h2>
-              {user ? renderAdoptFosterButton() : null}
-              {user ? renderReturnBtn() : null}
+            <Card.Body>
+              {user && rendering !== "admin" ? (
+                <h2 className="like-heart" onClick={handleLike}>
+                  {like ? "🧡" : "🤍"}
+                </h2>
+              ) : null}
+            </Card.Body>
+            <Card.Body>
+              {user &&
+              rendering === "myPets" &&
+              pet.adoptionStatus !== "Available"
+                ? renderReturnBtn()
+                : null}
+              {user &&
+              rendering === "myPets" &&
+              pet.adoptionStatus === "Available"
+                ? renderAdoptFosterButton()
+                : null}
             </Card.Body>
           </Card>
         </Row>

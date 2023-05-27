@@ -152,6 +152,7 @@ export const Pet = ({
         />
       ) : (
         <PetPage
+          rendering={rendering}
           className="w-100"
           pet={pet}
           user={user}
