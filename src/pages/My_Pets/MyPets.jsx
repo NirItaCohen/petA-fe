@@ -2,11 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { Accordion, Container } from "react-bootstrap";
 import { AppContext } from "../../App";
 import { getAllPets } from "../../utils/DB/Pets/petsCrud";
-import {
-  getUser,
-  adoptOrFosterAndRetrun,
-} from "../../utils/DB/Users/usersCrud";
+import { getUser } from "../../utils/DB/Users/usersCrud";
 import { Pet } from "../../components/Pet/Pet";
+
+import "./myPets.css";
 
 export const MyPets = () => {
   const { user } = useContext(AppContext);
@@ -144,7 +143,26 @@ export const MyPets = () => {
 
   return (
     <Container className="mt-3">
-      <Accordion>
+      <div className="wrapper">
+        <div className="box">
+          <input type="radio" name="box" id="adopted" checked="checked" />
+          <label htmlFor="adopted">Adopted Pets</label>
+          <div className="content">
+            {Array.isArray(adoptedPets) ? renderAdoptedPets() : null}
+          </div>
+          <input type="radio" name="box" id="fostered" />
+          <label htmlFor="fostered">Fostered Pets</label>
+          <div className="content">
+            {Array.isArray(fosteredPets) ? renderFosteredPets() : null}
+          </div>
+          <input type="radio" name="box" id="liked" />
+          <label htmlFor="liked">Liked Pets</label>
+          <div className="content">
+            {Array.isArray(likedPets) ? renderLikedPets() : null}
+          </div>
+        </div>
+      </div>
+      {/* <Accordion>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Adopted Pets</Accordion.Header>
           <Accordion.Body className="w-100">
@@ -163,7 +181,7 @@ export const MyPets = () => {
             {Array.isArray(likedPets) ? renderLikedPets() : null}
           </Accordion.Body>
         </Accordion.Item>
-      </Accordion>
+      </Accordion> */}
     </Container>
   );
 };

@@ -3,6 +3,8 @@ import { Admin } from "../../components/Admin/Admin";
 import { WelcomeDiv } from "../../components/Welcome_Div/WelcomeDiv";
 import { AppContext } from "../../App";
 
+import "./home.css";
+
 export const Home = () => {
   const { user } = useContext(AppContext);
   const [userType, setUserType] = useState("");
@@ -16,7 +18,6 @@ export const Home = () => {
   return (
     <>
       {userType !== "admin" ? <WelcomeDiv user={userType} /> : null}
-
       {userType === "admin" ? <Admin /> : null}
     </>
   );

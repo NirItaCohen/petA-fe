@@ -46,7 +46,7 @@ export const Navbar = () => {
               <NavLink to={"/MyPets"}>{user.name} pets</NavLink>
               <button
                 onClick={handleLogOut}
-                className="btn btn-outline-light mx-2"
+                className="btn btn-outline-light mx-3"
               >
                 Log out
               </button>

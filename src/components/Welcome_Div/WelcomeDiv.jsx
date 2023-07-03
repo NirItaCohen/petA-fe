@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Container } from "react-bootstrap";
 import { AppContext } from "../../App";
+import BGimg from "../../pages/Home/BGimg";
 
 export const WelcomeDiv = () => {
   const { user } = useContext(AppContext);
@@ -8,7 +9,7 @@ export const WelcomeDiv = () => {
   return (
     <div>
       {user ? (
-        <>
+
           <Container className="mt-5">
             <h1 className="mb-3">Welcome {user.firstName}</h1>
             <p>
@@ -19,9 +20,8 @@ export const WelcomeDiv = () => {
               of wagging tails and endless love!
             </p>
           </Container>
-        </>
       ) : (
-        <>
+        
           <Container className="mt-5">
             <h1 className="mb-3"> Welcome to Let The Animals Live! </h1>
             <p>
@@ -31,8 +31,9 @@ export const WelcomeDiv = () => {
               Welcome to a world where love and companionship know no bounds!
             </p>
           </Container>
-        </>
+        
       )}
+      <BGimg />
     </div>
   );
 };
