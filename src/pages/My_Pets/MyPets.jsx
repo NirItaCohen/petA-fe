@@ -43,7 +43,14 @@ export const MyPets = () => {
   const userLikedPets = async () => {
     const data = await getUser(user._id);
     const likedPetsData = data.data.data.user.petsLiked;
-    if (!likedPetsData || likedPetsData.length <= 0) {
+    const likedUserData = data.data.data.user.userLiked;
+
+    if (
+      !likedPetsData ||
+      likedPetsData.length <= 0 ||
+      !likedUserData ||
+      likedUserData.length <= 0
+    ) {
       return;
     }
     setLikedPets(JSON.parse(JSON.stringify(likedPetsData)));
@@ -64,7 +71,7 @@ export const MyPets = () => {
     setPets(currentPets);
   };
 
-  const updateUi = ( petId, action) => {
+  const updateUi = (petId, action) => {
     console.log("updateUid from my pets");
     switch (action) {
       case "adopt":
@@ -79,15 +86,6 @@ export const MyPets = () => {
       default:
         break;
     }
-  };
-
-  const userLikedPets = async () => {
-    const data = await getUser(user._id);
-    const likedPetsData = data.data.data.user.userLiked;
-    if (!likedPetsData || likedPetsData.length <= 0) {
-      return;
-    }
-    setLikedPets(JSON.parse(JSON.stringify(likedPetsData)));
   };
 
   const renderUserPets = (satusPets) => {
@@ -137,9 +135,6 @@ export const MyPets = () => {
   };
 
   const renderFosteredPets = () => {
-    return renderUserPets(fosteredPets);
-  };
-  const renderLikedPets = () => {
     return renderUserPets(fosteredPets);
   };
 
