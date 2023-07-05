@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createContext, useState } from "react";
-import "./App.css";
+import "./app.css";
 
 import { Home } from "./pages/Home/Home.jsx";
 import { MyPets } from "./pages/My_Pets/MyPets.jsx";
 import { Navbar } from "./components/Navbar/Navbar";
 import { Search } from "./pages/Search/Search";
-import Footer from "./components/Footer/footer";
+
 
 export const AppContext = createContext();
 function App() {
@@ -22,9 +22,9 @@ function App() {
             <Route path="/MyPets" element={<MyPets />} />
             <Route path="/search" element={<Search />} />
           </Routes>
-          <Footer />
         </Router>
       </AppContext.Provider>
+
     </div>
   );
 }

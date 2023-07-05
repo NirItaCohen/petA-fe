@@ -135,6 +135,7 @@ export const Pet = ({
     <>
       {!showPetPage ? (
         <PetCard
+          className="w-100"
           rendering={rendering}
           pet={pet}
           adminResults={adminResults}

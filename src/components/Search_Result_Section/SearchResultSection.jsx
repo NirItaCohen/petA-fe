@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Pet } from "../Pet/Pet";
 
+import "./searchResultsSection.css";
+
 export const SearchResultSection = ({ filteredSearch, user }) => {
   const [pets, setPets] = useState(null);
 
@@ -20,7 +22,7 @@ export const SearchResultSection = ({ filteredSearch, user }) => {
   };
 
   return (
-    <div className="border w-75 mx-2 p-3 d-flex flex-column align-items-center">
+    <div className=" w-75 mx-2 p-3 d-flex flex-column align-items-center ">
       <h3 className="pt-2">Results</h3>
 
       {Array.isArray(pets) && pets.length > 0 && renderPets()}

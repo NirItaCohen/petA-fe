@@ -3,6 +3,8 @@ import { AdmimContext } from "../Admin";
 import { Pet } from "../../Pet/Pet";
 import { UserCard } from "../../User_Card/UserCard";
 
+import "./adminResultsSection.css";
+
 export const AdminResultsSection = () => {
   const { users, pets, toggle, openEditModal, deleteInstance } =
     useContext(AdmimContext);
@@ -32,8 +34,8 @@ export const AdminResultsSection = () => {
   };
 
   return (
-    <div className="border w-50 mx-2 p-3 d-flex flex-column align-items-center">
-      <h3 className="pt-2">Results</h3>
+    <div className=" w-50 mx-2 pb-3 d-flex flex-column align-items-center ">
+      <h3 className="pt-1">Results</h3>
       {toggle === "pets" &&
         Array.isArray(pets) &&
         pets.length > 0 &&

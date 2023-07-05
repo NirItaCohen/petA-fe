@@ -4,58 +4,40 @@ function BGimg() {
   return (
     <div className="banner">
       <div
-        className="banner-img"
+        className="banner-img shadow-lg "
         style={{
-          height: "50%",
+          height: "93vh",
           backgroundImage:
-            "url(https://cdn2.thecatapi.com/images/8NdgktL3E.jpg)", //cat
+            "url(https://cdn2.thecatapi.com/images/kjKxmn3Ob.jpg)", //cat
         }}
       ></div>
       <div
-        className="banner-img"
+        className="banner-img shadow-lg "
         style={{
-          height: "50%",
+          height: "93vh",
 
           backgroundImage:
             "url(https://images.dog.ceo/breeds/pitbull/pitbull_dog.jpg)", //dog
         }}
       ></div>
       <div
-        className="banner-img"
+        className="banner-img shadow-lg "
         style={{
-          height: "50%",
+          height: "93vh",
 
           backgroundImage:
-            "url(https://cdn2.thecatapi.com/images/LIoOlcalr.jpg)", //cat
+            "url(https://cdn2.thecatapi.com/images/SCHe-SekW.jpg)", //cat
         }}
       ></div>
       <div
-        className="banner-img"
+        className="banner-img shadow-lg "
         style={{
-          height: "50%",
+          height: "93vh",
 
           backgroundImage:
-            "url(https://images.dog.ceo/breeds/springer-english/n02102040_835.jpg)", //dog
+            "url(https://images.dog.ceo/breeds/mastiff-bull/n02108422_4945.jpg)", //dog
         }}
       ></div>
-      <div
-        className="banner-img"
-        style={{
-          height: "50%",
-
-          backgroundImage:
-            "url(https://cdn2.thecatapi.com/images/MuEGe1-Sz.jpg)", //cat
-        }}
-      ></div>
-      <div
-        className="banner-img"
-        style={{
-          height: "50%",
-
-          backgroundImage:
-            "url(https://images.dog.ceo/breeds/chihuahua/n02085620_11140.jpg)", //dog
-        }}
-      ></div>{" "}
     </div>
   );
 }

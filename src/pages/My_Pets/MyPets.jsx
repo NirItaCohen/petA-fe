@@ -44,12 +44,7 @@ export const MyPets = () => {
     const likedPetsData = data.data.data.user.petsLiked;
     const likedUserData = data.data.data.user.userLiked;
 
-    if (
-      !likedPetsData ||
-      likedPetsData.length <= 0 ||
-      !likedUserData ||
-      likedUserData.length <= 0
-    ) {
+    if (!likedPetsData || likedPetsData.length <= 0) {
       return;
     }
     setLikedPets(JSON.parse(JSON.stringify(likedPetsData)));
@@ -103,7 +98,7 @@ export const MyPets = () => {
           key={item._id}
           user={user}
           rendering="myPets"
-          className="w-100"
+          className="w-100 mx-2"
         />
       ) : null;
     });
@@ -143,9 +138,9 @@ export const MyPets = () => {
 
   return (
     <Container className="mt-3">
-      <div className="wrapper">
+      <div className="pets-wrapper">
         <div className="box">
-          <input type="radio" name="box" id="adopted" checked="checked" />
+          <input type="radio" name="box" id="adopted" />
           <label htmlFor="adopted">Adopted Pets</label>
           <div className="content">
             {Array.isArray(adoptedPets) ? renderAdoptedPets() : null}
@@ -162,26 +157,6 @@ export const MyPets = () => {
           </div>
         </div>
       </div>
-      {/* <Accordion>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Adopted Pets</Accordion.Header>
-          <Accordion.Body className="w-100">
-            {Array.isArray(adoptedPets) ? renderAdoptedPets() : null}
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>Fostereds Pets</Accordion.Header>
-          <Accordion.Body>
-            {Array.isArray(fosteredPets) ? renderFosteredPets() : null}
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="2">
-          <Accordion.Header>Liked Pets</Accordion.Header>
-          <Accordion.Body>
-            {Array.isArray(likedPets) ? renderLikedPets() : null}
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion> */}
     </Container>
   );
 };

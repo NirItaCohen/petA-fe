@@ -1,3 +1,11 @@
+a {
+  font-size: 1rem;
+}
+
 .container-height {
   height: fit-content;
+}
+
+footer {
+  /* bottom: inherit; */
 }

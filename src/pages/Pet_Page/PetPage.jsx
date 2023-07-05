@@ -16,7 +16,7 @@ export const PetPage = ({
 }) => {
   return (
     <>
-      <Container className="mt-3">
+      <Container className="mt-3 pet-card">
         <Row md={4} xl={2} className="d-flex flex-column">
           <Image
             className="w-50 ratio ratio-16x9 rounded align-self-center mb-2"

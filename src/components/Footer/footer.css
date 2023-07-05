@@ -1,0 +1,54 @@
+footer {
+  background: #ffc107;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+}
+
+.single-box p {
+  color: #fff;
+  line-height: 1.9;
+}
+
+.single-box h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.single-box card-area i {
+  color: #fff;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.single-box h2 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+#basic-addon {
+  background: #fe1e4f;
+  color: #fff;
+}
+
+.socials svg {
+  margin: 0.5rem 1rem 0 0;
+}
+
+@media (max-width: 480px) {
+  .container {
+    overflow: hidden;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+  }
+  /* .container,
+  .row,
+  .single-box,
+  .main,
+  p {
+    width: 90%;
+  } */
+}

@@ -25,27 +25,27 @@ export const AdminSearchSection = ({ tabType }) => {
 
   return (
     <>
-      <div className="border w-25 d-flex flex-column align-items-center">
-        <Nav variant="tabs" className="mt-2 h4 w-100" defaultActiveKey={"#"}>
+      <div className=" w-25 d-flex flex-column align-items-center">
+        <Nav variant="tabs" className="box  w-100" defaultActiveKey={"#"}>
           <Nav.Item>
-            <Nav.Link
+            <a
               onClick={(event) => toggleView(event)}
               name="pets"
               href={toggle === "pets" && "#"}
-              className={toggle === "users" ? "text-secondary" : "text-primary"}
+              className={toggle === "users" ? "second " : "primary"}
             >
               Pets
-            </Nav.Link>
+            </a>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link
+            <a
               onClick={(event) => toggleView(event)}
               name="users"
               href={toggle === "users" && "#"}
-              className={toggle === "pets" ? "text-secondary" : "text-primary"}
+              className={toggle === "pets" ? "second" : "primary"}
             >
               Users
-            </Nav.Link>
+            </a>
           </Nav.Item>
         </Nav>
 
@@ -55,7 +55,7 @@ export const AdminSearchSection = ({ tabType }) => {
               <Button
                 onClick={() => showAll(tabType)}
                 className="m-4"
-                variant={"outline-primary"}
+                variant={"outline-warning"}
               >
                 Show {upperFirstTabChar()}s
               </Button>
@@ -63,7 +63,7 @@ export const AdminSearchSection = ({ tabType }) => {
                 <Button
                   onClick={openAddModal}
                   className="m-4"
-                  variant={"outline-primary"}
+                  variant={"outline-warning"}
                 >
                   Add {upperFirstTabChar()}
                 </Button>

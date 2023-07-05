@@ -89,8 +89,8 @@ export const SearchSection = ({ setFilteredSearch }) => {
   };
 
   return (
-    <div className="border w-25 d-flex flex-column align-items-center p-4">
-      <button onClick={show}>Show</button>
+    <div className=" w-25 d-flex flex-column align-items-center p-4">
+      {/* <button onClick={show}>Show</button> */}
       <Form onSubmit={handleSubmit} className="mb-3 w-100">
         <Form.Label as="legend" column sm={2} className="w-50 mb-2">
           Pet Type
@@ -114,6 +114,7 @@ export const SearchSection = ({ setFilteredSearch }) => {
         </Form.Label>
         <Form.Group className="mb-4">
           <Form.Check
+            type="switch"
             name="showAdvance"
             id="showAdvance"
             value={showAdvance}
@@ -187,7 +188,9 @@ export const SearchSection = ({ setFilteredSearch }) => {
             </Form.Group>
           </>
         ) : null}
-        <Button type="submit">Search</Button>
+        <Button type="submit" variant="warning">
+          Search
+        </Button>
       </Form>
     </div>
   );

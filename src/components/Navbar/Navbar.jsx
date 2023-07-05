@@ -31,7 +31,7 @@ export const Navbar = () => {
   return (
     <>
       <Container
-        className="bg-warning py-3 border-0 d-flex justify-content-between align-items-center"
+        className="bg-warning py-3 border-0 d-flex justify-content-between align-items-center  main-navbar"
         fluid
       >
         <NavLink className={"display-6"} to={"/"}>

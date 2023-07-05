@@ -16,7 +16,7 @@ export const PetCard = ({
 }) => {
   return (
     <>
-      <Card className="w-75 my-3">
+      <Card className="w-100 my-3">
         <Card.Body className="d-flex flex-column align-items-center">
           <Card.Title className="d-2">{pet.name}</Card.Title>
           <div className="d-flex w-100 ">

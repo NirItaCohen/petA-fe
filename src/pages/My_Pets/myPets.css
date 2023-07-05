@@ -2,7 +2,7 @@ body {
   background: beige;
 }
 
-.wrapper {
+.pets-wrapper {
   min-height: 100vh;
   box-sizing: border-box;
   padding-top: 5%;
@@ -17,7 +17,7 @@ body {
 }
 
 .box label {
-  background: #ec6633;
+  background: #ffc107;
   font-weight: bold;
   text-align: center;
   box-shadow: 0 2px 10x -2px rgba(0, 0, 0, 0.5);
