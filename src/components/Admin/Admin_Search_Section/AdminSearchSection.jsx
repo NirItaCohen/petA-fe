@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useContext } from "react";
 import { Button, Nav } from "react-bootstrap";
 import { AdmimContext } from "../Admin";
@@ -31,7 +32,7 @@ export const AdminSearchSection = ({ tabType }) => {
             <a
               onClick={(event) => toggleView(event)}
               name="pets"
-              href={toggle === "pets" && "#"}
+              href={toggle === "pets" ? "#" : undefined}
               className={toggle === "users" ? "second " : "primary"}
             >
               Pets
@@ -41,7 +42,7 @@ export const AdminSearchSection = ({ tabType }) => {
             <a
               onClick={(event) => toggleView(event)}
               name="users"
-              href={toggle === "users" && "#"}
+              href={toggle === "users" ? "#" : undefined}
               className={toggle === "pets" ? "second" : "primary"}
             >
               Users
@@ -54,16 +55,16 @@ export const AdminSearchSection = ({ tabType }) => {
             <>
               <Button
                 onClick={() => showAll(tabType)}
-                className="m-4"
-                variant={"outline-warning"}
+                className="shadow m-4"
+                variant={"warning"}
               >
                 Show {upperFirstTabChar()}s
               </Button>
               {tabType === "pet" && (
                 <Button
                   onClick={openAddModal}
-                  className="m-4"
-                  variant={"outline-warning"}
+                  className="shadow m-4"
+                  variant={"warning"}
                 >
                   Add {upperFirstTabChar()}
                 </Button>

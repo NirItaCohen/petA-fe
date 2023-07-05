@@ -188,7 +188,7 @@ export const SearchSection = ({ setFilteredSearch }) => {
             </Form.Group>
           </>
         ) : null}
-        <Button type="submit" variant="warning">
+        <Button type="submit" variant="warning" className="shadow">
           Search
         </Button>
       </Form>
