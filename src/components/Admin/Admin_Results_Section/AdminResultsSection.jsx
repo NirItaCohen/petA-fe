@@ -34,7 +34,10 @@ export const AdminResultsSection = () => {
   };
 
   return (
-    <div className=" w-50 mx-2 pb-3 d-flex flex-column align-items-center ">
+    <div
+      className=" w-50 mx-2 pb-3 d-flex flex-column align-items-center 
+    admin-section"
+    >
       <h3 className="pt-1">Results</h3>
       {toggle === "pets" &&
         Array.isArray(pets) &&

@@ -77,10 +77,11 @@ export const PetCard = ({
           <Card.Body>
             {(user &&
               rendering === "myPets" &&
-              pet.adoptionStatus === "Foster") ||
-            pet.adoptionStatus === "Adopted"
+              pet.adoptionStatus === "Fostered") ||
+              pet.adoptionStatus === "Adopted"
               ? renderReturnBtn()
               : null}
+            {/* {renderReturnBtn()} */}
             {user &&
             rendering === "myPets" &&
             pet.adoptionStatus === "Available"

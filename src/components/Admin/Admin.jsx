@@ -119,7 +119,7 @@ export const Admin = () => {
               method={editInstance}
             />
           ) : null}
-          <AdminResultsSection />
+          <AdminResultsSection className="admin-section"  />
         </Container>
       </AdmimContext.Provider>
     </>

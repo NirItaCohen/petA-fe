@@ -20,6 +20,12 @@ p {
   text-shadow: 2px 2px 2px #555050;
 }
 
+.admin-section {
+  background: #fff;
+  border-radius: 3px;
+  padding-top: 3px;
+}
+
 .box a,
 .pet-details p {
   text-shadow: none;

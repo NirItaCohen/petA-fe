@@ -82,11 +82,11 @@ export const MyPets = () => {
     }
   };
 
-  const renderUserPets = (satusPets) => {
-    if (pets === null || satusPets === null || petsIds === null) {
+  const renderUserPets = (statusPets) => {
+    if (pets === null || !statusPets || petsIds === null) {
       return;
     }
-    const arr = satusPets.map((pet) => {
+    const arr = statusPets.map((pet) => {
       const petIndex = petsIds.indexOf(pet) > -1 ? petsIds.indexOf(pet) : -1;
       return petIndex > -1 ? pets[petIndex] : null;
     });

@@ -86,22 +86,28 @@ export const Pet = ({
     pet.adoptionStatus === "Available" ? "m-2" : "m-2 disabled";
 
   const renderReturnBtn = () => {
-    if (
-      (pet.adoptionStatus === "Adopted" &&
+    if (user && rendering === "myPets") {
+      if (
+        (pet.adoptionStatus === "Adopted" 
+        // ) ||
+        &&
         user.petsAdopted.includes(pet._id)) ||
-      (pet.adoptionStatus === "Fostered" && user.petsFostered.includes(pet._id))
-    ) {
-      return (
-        <>
+        (pet.adoptionStatus === "Fostered" 
+        // )
+        && user.petsFostered.includes(pet._id))
+        ) {
+          return (
+            <>
           <Button
             className="m-2"
             variant="outline-danger"
             onClick={() => returnPet()}
-          >
+            >
             Return
           </Button>
         </>
       );
+    }
     }
     return null;
   };

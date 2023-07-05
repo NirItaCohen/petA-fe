@@ -26,7 +26,7 @@ export const AdminSearchSection = ({ tabType }) => {
 
   return (
     <>
-      <div className=" w-25 d-flex flex-column align-items-center">
+      <div className=" w-25 d-flex flex-column align-items-center admin-section">
         <Nav variant="tabs" className="box  w-100" defaultActiveKey={"#"}>
           <Nav.Item>
             <a
