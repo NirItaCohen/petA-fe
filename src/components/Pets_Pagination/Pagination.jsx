@@ -10,7 +10,7 @@ function PetsPagination({
   const pages = [];
   for (let i = 1; i < Math.ceil(totalPets / petsPerPage); i++) {
     pages.push(
-      <Pagination.Item className="btn mx-0" key={i} style={{ margin: "0", padding: 0 }}>
+      <Pagination.Item className="btn mx-0" key={i} style={{ margin: 0, padding: 0 }}>
         {i}
       </Pagination.Item>
     );

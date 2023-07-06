@@ -33,6 +33,10 @@ footer {
   color: #fff;
 }
 
+svg {
+  cursor: pointer;
+}
+
 .socials svg {
   margin: 0.5rem 1rem 0 0;
 }
@@ -44,11 +48,4 @@ footer {
     display: flex;
     flex-direction: column;
   }
-  /* .container,
-  .row,
-  .single-box,
-  .main,
-  p {
-    width: 90%;
-  } */
 }
