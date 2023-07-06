@@ -79,7 +79,6 @@ export const Pet = ({
         : pet.adoptionStatus === "Fostered"
         ? adoptOrFosterAndRetrun(user._id, pet._id, "foster", "PATCH")
         : null;
-    return returnFunction;
   };
 
   const btnClasses =
@@ -88,26 +87,22 @@ export const Pet = ({
   const renderReturnBtn = () => {
     if (user && rendering === "myPets") {
       if (
-        (pet.adoptionStatus === "Adopted" 
-        // ) ||
-        &&
-        user.petsAdopted.includes(pet._id)) ||
-        (pet.adoptionStatus === "Fostered" 
-        // )
-        && user.petsFostered.includes(pet._id))
-        ) {
-          return (
-            <>
-          <Button
-            className="m-2"
-            variant="outline-danger"
-            onClick={() => returnPet()}
+        pet.adoptionStatus === "Adopted" ||
+        pet.adoptionStatus === "Fostered" ||
+        pet.adoptionStatus === "Foster"
+      ) {
+        return (
+          <>
+            <Button
+              className="m-2"
+              variant="outline-danger"
+              onClick={() => returnPet()}
             >
-            Return
-          </Button>
-        </>
-      );
-    }
+              Return
+            </Button>
+          </>
+        );
+      }
     }
     return null;
   };

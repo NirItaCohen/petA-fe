@@ -11,8 +11,8 @@ export const WelcomeDiv = () => {
     <div className="welcome">
       {user ? (
         <Container className="mt-5">
-          <h1 className="mb-3">Welcome {user.firstName}</h1>
-          <p>
+          <h1 className="mb-3 welcome-headline">Welcome {user.firstName}</h1>
+          <p className="welcome-p">
             Welcome back, {user.firstName}! We're thrilled to have you continue
             your pet adoption journey with us. Get ready to find your perfect
             furry companion and experience the joy they bring. Let's make more
@@ -22,8 +22,10 @@ export const WelcomeDiv = () => {
         </Container>
       ) : (
         <Container className="mt-5">
-          <h1 className="mb-3"> Welcome to Let Animals Live! </h1>
-          <p>
+          <h1 className="mb-3 welcome-headline">
+            Welcome to Let Animals Live!
+          </h1>
+          <p className="welcome-p">
             Welcome to our pet adoption app, brought to you by LAL! Discover
             your perfect furry companion and make a difference in their lives.
             Join our community of animal lovers and find your match today.

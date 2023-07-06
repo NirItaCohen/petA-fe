@@ -37,13 +37,14 @@ export const PetCard = ({
               height={210}
               variant="top"
               src={pet.picture}
+              alt={pet.name}
             />
           </div>
         </Card.Body>
         <div className="d-flex m-1 justify-content-between align-items-center">
           <Button
             style={{ color: "white" }}
-            className="pet-link btn btn-outline-primary "
+            className="pet-link btn btn-outline-primary mb-2 ms-2"
             onClick={() => setShowPetPage()}
           >
             {pet.name}'s page
@@ -75,13 +76,7 @@ export const PetCard = ({
             ) : null}
           </Card.Body>
           <Card.Body>
-            {(user &&
-              rendering === "myPets" &&
-              pet.adoptionStatus === "Fostered") ||
-              pet.adoptionStatus === "Adopted"
-              ? renderReturnBtn()
-              : null}
-            {/* {renderReturnBtn()} */}
+            {renderReturnBtn()}
             {user &&
             rendering === "myPets" &&
             pet.adoptionStatus === "Available"

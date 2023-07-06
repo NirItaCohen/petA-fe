@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Accordion, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { AppContext } from "../../App";
 import { getAllPets } from "../../utils/DB/Pets/petsCrud";
 import { getUser } from "../../utils/DB/Users/usersCrud";
@@ -56,6 +56,7 @@ export const MyPets = () => {
     if (pet === undefined) return;
     pet.adoptionStatus = "Adopted";
     setPets(currentPets);
+    // updateUi(petId, "adopt");
   };
   const updateFosterPet = (petId) => {
     const currentPets = [...pets];
@@ -63,6 +64,7 @@ export const MyPets = () => {
     if (pet === undefined) return;
     pet.adoptionStatus = "Fostered";
     setPets(currentPets);
+    // updateUi(petId, "foster");
   };
 
   const updateUi = (petId, action) => {
@@ -74,9 +76,7 @@ export const MyPets = () => {
 
       case "foster":
         updateFosterPet(petId);
-
         break;
-
       default:
         break;
     }

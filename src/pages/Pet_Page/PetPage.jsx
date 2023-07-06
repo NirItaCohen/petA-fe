@@ -8,7 +8,7 @@ export const PetPage = ({
   user,
   badgeStatus,
   setShowPetPage,
-  deleteInstance,
+
   like,
   handleLike,
   renderReturnBtn,
@@ -19,7 +19,7 @@ export const PetPage = ({
       <Container className="mt-3 pet-card">
         <Row md={4} xl={2} className="d-flex flex-column">
           <Image
-            className="w-50 ratio ratio-16x9 rounded align-self-center mb-2"
+            className="w-50 ratio ratio-16x9 rounded align-self-center my-3"
             width={160}
             height={210}
             variant="top"
@@ -37,32 +37,34 @@ export const PetPage = ({
             </Card.Body>
             <ListGroup className="list-group-flush">
               <ListGroup.Item>
-                <p className="warning-text-emphasis">
-                  Adoption Status -
-                  <Badge className="ms-2" bg={badgeStatus}>
+                <p className="warning-text-emphasis my-2 ">
+                  Adoption Status
+                  <Badge className="ms-3" bg={badgeStatus}>
                     {pet.adoptionStatus}
                   </Badge>
                 </p>
               </ListGroup.Item>
               <ListGroup.Item>
-                <p className="warning-text-emphasis">Breed - {pet.breed}</p>
+                <p className="warning-text-emphasis my-2">
+                  Breed - {pet.breed}
+                </p>
               </ListGroup.Item>
               <ListGroup.Item>
-                <p className="warning-text-emphasis">
+                <p className="warning-text-emphasis my-2">
                   Height - {pet.height} cm
                 </p>
               </ListGroup.Item>
               <ListGroup.Item>
-                <p className="warning-text-emphasis">
+                <p className="warning-text-emphasis my-2">
                   Weight - {pet.weight} kg
                 </p>
               </ListGroup.Item>
               <ListGroup.Item>
-                <p className="warning-text-emphasis">
+                <p className="warning-text-emphasis my-2">
                   Hypoallergnic -
                   <Badge
                     className="ms-2"
-                    bg={pet.hypoallergnic ? "success" : "warning"}
+                    bg={pet.hypoallergnic ? "primary" : "danger"}
                   >
                     {pet.hypoallergnic ? "Yes" : "No"}
                   </Badge>

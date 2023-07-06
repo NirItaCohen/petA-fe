@@ -31,3 +31,9 @@ a:active {
 .main-navbar {
   box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.6);
 }
+
+.main-navbar a,
+h1,
+h2 {
+  text-shadow: 2px 2px 2px #555050;
+}
