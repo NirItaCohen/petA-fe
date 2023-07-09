@@ -1,16 +1,26 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AdmimContext } from "../Admin";
 import { Pet } from "../../Pet/Pet";
 import { UserCard } from "../../User_Card/UserCard";
 
 import "./adminResultsSection.css";
+import PetsPagination from "../../Pets_Pagination/Pagination";
 
 export const AdminResultsSection = () => {
   const { users, pets, toggle, openEditModal, deleteInstance } =
     useContext(AdmimContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [petsPerPage, setPetsPerPage] = useState(10);
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => prev + 1);
+  };
+  const handlePrevPage = () => {
+    setCurrentPage((prev) => prev - 1);
+  };
 
   const renderPets = () => {
-    return pets.map((pet) => (
+    return currentPets.map((pet) => (
       <Pet
         pet={pet}
         key={pet._id}
@@ -33,6 +43,12 @@ export const AdminResultsSection = () => {
     ));
   };
 
+  const petsArr = Array.isArray(pets) && pets.length > 0 ? pets : [];
+
+  let lastPetsIndex = currentPage * petsPerPage;
+  let firstPetsIndex = lastPetsIndex - petsPerPage;
+  let currentPets = petsArr.slice(firstPetsIndex, lastPetsIndex);
+
   return (
     <div
       className=" w-50 mx-2 pb-3 d-flex flex-column align-items-center 
@@ -47,6 +63,15 @@ export const AdminResultsSection = () => {
         Array.isArray(users) &&
         users.length > 0 &&
         renderUsers()}
+      {pets && (
+        <PetsPagination
+          currentPage={currentPage}
+          pets={pets}
+          petsPerPage={petsPerPage}
+          handlePrevPage={handlePrevPage}
+          handleNextPage={handleNextPage}
+        />
+      )}
     </div>
   );
 };

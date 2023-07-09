@@ -6,7 +6,7 @@ import { searchFilter } from "../../pages/Search/searchFilter";
 const PET_TYPES = ["cat", "dog", "other"];
 const ADOPTION_STATUS = ["adopted", "fostered", "available"];
 
-export const SearchSection = ({ setFilteredSearch }) => {
+export const SearchSection = ({ setFilteredSearch, setCurrentPage }) => {
   const [showAdvance, setShowAdvance] = useState(false);
   const [petType, setPetType] = useState([]);
   const [status, setStatus] = useState([]);
@@ -74,7 +74,9 @@ export const SearchSection = ({ setFilteredSearch }) => {
       showAdvance,
     };
     setIsSubmited(!isSubmited);
-    setFilteredSearch(searchFilter(searchObject));
+    const filtered = await searchFilter(searchObject);
+    setCurrentPage(1);
+    setFilteredSearch(filtered);
   };
 
   const show = () => {

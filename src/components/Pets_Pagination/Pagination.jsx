@@ -1,31 +1,34 @@
 import React from "react";
-import { PageItem, Pagination } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 function PetsPagination({
-  totalPets,
-  petsPerPage,
-  setCurrentPage,
+  handleNextPage,
+  handlePrevPage,
   currentPage,
+  pets,
+  petsPerPage,
 }) {
-  const pages = [];
-  for (let i = 1; i < Math.ceil(totalPets / petsPerPage); i++) {
-    pages.push(
-      <Pagination.Item className="btn mx-0" key={i} style={{ margin: 0, padding: 0 }}>
-        {i}
-      </Pagination.Item>
-    );
-  }
-
-  const handlePageClick = (event) => {
-    const num = event.target.innerText;
-    setCurrentPage(3);
-  };
   return (
-    <div>
-      <Pagination onClick={(event) => handlePageClick(event)}>
-        {pages}
-      </Pagination>
-    </div>
+    <ul className="pagination">
+      <li className="page-item">
+        <Button
+          className="page-link"
+          onClick={handleNextPage}
+          disabled={currentPage === Math.ceil(pets?.length / petsPerPage)}
+        >
+          Next Page
+        </Button>
+      </li>
+      <li className="page-item">
+        <Button
+          className="page-link"
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+        >
+          Previous Page
+        </Button>
+      </li>
+    </ul>
   );
 }
 

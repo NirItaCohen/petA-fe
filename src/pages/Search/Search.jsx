@@ -11,6 +11,7 @@ import { getUser } from "../../utils/DB/Users/usersCrud";
 export const Search = () => {
   const [filteredSearch, setFilteredSearch] = useState(null);
   const { user, setUser } = useContext(AppContext);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -28,8 +29,16 @@ export const Search = () => {
         fluid
         className="d-flex justify-content-evenly container-height mt-4"
       >
-        <SearchSection setFilteredSearch={setFilteredSearch} />
-        <SearchResultSection filteredSearch={filteredSearch} user={user} />
+        <SearchSection
+          setFilteredSearch={setFilteredSearch}
+          setCurrentPage={setCurrentPage}
+        />
+        <SearchResultSection
+          filteredSearch={filteredSearch}
+          user={user}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </Container>
     </>
   );
